@@ -23,5 +23,11 @@ class HomeController < ApplicationController
 
     destination_path = File.join("public", "videos", "#{@title}---#{@id}.#{@ext}")
     DownloadVideoJob.perform_now(video_url) unless File.exist?(destination_path)
+    ActionCable.server.broadcast("splash", {"event": "play", "url": File.join("videos", "#{@title}---#{@id}.#{@ext}")})
+
+    redirect_to root_url
+  end
+
+  def splash
   end
 end

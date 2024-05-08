@@ -17,7 +17,7 @@
                   <tr>
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"><%= result["id"] %></td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= link_to result["title"], result["url"] %></td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= link_to "Play", play_url(title: result["title"], id: result["id"]), class: "underlined", target: "_blank" %></td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= link_to "Play", play_url(title: result["title"], id: result["id"]), class: "underlined" %></td>
                   </tr>
                 <% end %>
               </tbody>
