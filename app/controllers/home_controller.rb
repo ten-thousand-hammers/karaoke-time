@@ -16,21 +16,12 @@ class HomeController < ApplicationController
 
   def play
     video_url = "https://www.youtube.com/watch?v=#{params[:id]}"
-    title = params[:title]
-    id = params[:id]
-    ext = "mp4"
+    
+    @title = params[:title]
+    @id = params[:id]
+    @ext = "mp4"
 
-    destination_path = File.join("downloads", "#{title}---#{id}.#{ext}")
-    unless File.exist?(destination_path)
-      download_path = File.join("downloads", "%(title)s---%(id)s.%(ext)s")
-      # file_quality = "bestvideo[ext!=webm][height<=1080]+bestaudio[ext!=webm]/best[ext!=webm]"
-      file_quality = "mp4"
-      cmd = ["yt-dlp", "-f", file_quality, "-o", "\"#{download_path}\"", video_url].join(" ")
-      response = system(cmd)
-    end
-
-    StreamVideoJob.perform_later(destination_path)
-
-    sleep 2
+    destination_path = File.join("public", "videos", "#{@title}---#{@id}.#{@ext}")
+    DownloadVideoJob.perform_now(video_url) unless File.exist?(destination_path)
   end
 end
