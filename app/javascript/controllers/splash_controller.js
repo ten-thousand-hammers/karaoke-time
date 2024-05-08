@@ -3,7 +3,7 @@ import consumer from "channels/consumer"
 
 // Connects to data-controller="splash"
 export default class extends Controller {
-  static targets = [ "video" ]
+  static targets = [ "video", "permissions" ]
 
   initialize() {
     console.log("initialize")
@@ -32,7 +32,12 @@ export default class extends Controller {
     console.log(`play: ${url}`)
     this.videoTarget.src = url
     this.videoTarget.load()
+    this.videoTarget.classList.remove("hidden")
     this.videoTarget.play()
+  }
+
+  acceptPermissions() {
+    this.permissionsTarget.classList.add("hidden")
   }
 
   // connect() {
