@@ -72,3 +72,7 @@ group :test do
 end
 
 gem "rqrcode", "~> 2.0"
+
+# OmniAuth Auth0 strategy and CSRF protection
+gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'

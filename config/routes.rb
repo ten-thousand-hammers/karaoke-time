@@ -10,6 +10,11 @@ Rails.application.routes.draw do
 
   post "search" => "home#search"
   get "play" => "home#play"
-  get "splash" => "home#splash"
+  get "splash" => "splash#index"
   get "qrcode" => "home#qrcode"
+
+  get '/auth/auth0/callback' => 'auth0#callback'
+  get '/auth/failure' => 'auth0#failure'
+  get '/auth/logout' => 'auth0#logout'
+  get '/auth/redirect' => 'auth0#redirect'
 end
