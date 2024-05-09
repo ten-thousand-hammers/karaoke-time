@@ -5,48 +5,30 @@ class QueueVideoJob < ApplicationJob
     ext = "mp4"
 
     song = Song.find_by(external_id: external_id) 
-
-
-    # ActionCable.server.broadcast(
-    #   "splash", 
-    #   {
-    #     "event": "queue", 
-    #     "title": title,
-    #     "singer": singer
-    #   }
-    # )
-    
-    
-    video_url = "https://www.youtube.com/watch?v=#{song.external_id}"
+       
     destination_path = File.join("public", "videos", "#{song.name}---#{song.external_id}.#{ext}")
     unless File.exist?(destination_path)
-      DownloadVideoJob.perform_now(video_url)
+      DownloadVideoJob.perform_now("https://www.youtube.com/watch?v=#{song.external_id}")
       song.update!(path: File.join("videos", "#{song.name}---#{song.external_id}.#{ext}"))
     end
 
-    Performance.instance.update!(
-      up_next_song: song,
-      up_next_user: singer
-    )
-    sleep 5
-
-    unless Performance.instance.now_playing_song.present?
+    if Performance.instance.up_next_song.present?
+      Act.create!(song: song, user: singer)
+    else
       Performance.instance.update!(
-        up_next_song: nil,
-        up_next_user: nil,
-        now_playing_song: song,
-        now_playing_user: singer,
+        up_next_song: song,
+        up_next_user: singer
       )
     end
-
-    # ActionCable.server.broadcast(
-    #   "splash", 
-    #   {
-    #     "event": "play", 
-    #     "url": File.join("videos", "#{title}---#{id}.#{ext}"),
-    #     "title": title,
-    #     "singer": singer
-    #   }
-    # )
+    
+    return if Performance.instance.now_playing_song.present?
+    
+    sleep 5
+    Performance.instance.update!(
+      up_next_song: nil,
+      up_next_user: nil,
+      now_playing_song: song,
+      now_playing_user: singer,
+    )
   end
 end

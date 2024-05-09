@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_123815) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_174142) do
+  create_table "acts", force: :cascade do |t|
+    t.integer "song_id", null: false
+    t.text "user"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_acts_on_song_id"
+  end
+
   create_table "performances", force: :cascade do |t|
     t.string "now_playing_user"
     t.string "up_next_user"
@@ -34,6 +42,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_123815) do
     t.string "path"
   end
 
+  add_foreign_key "acts", "songs"
   add_foreign_key "performances", "songs", column: "now_playing_song_id"
   add_foreign_key "performances", "songs", column: "up_next_song_id"
 end

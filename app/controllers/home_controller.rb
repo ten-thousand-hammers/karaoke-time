@@ -39,10 +39,10 @@ class HomeController < ApplicationController
   def splash
     @performance = Performance.instance
 
-    @performance.now_playing_song = params[:now_playing_title] if params[:now_playing_title].present? 
+    @performance.now_playing_song = Song.find_by(external_id: params[:now_playing_song]) if params[:now_playing_song].present? 
     @performance.now_playing_user = params[:now_playing_singer] if params[:now_playing_singer].present? 
 
-    @performance.up_next_song = params[:up_next_title] if params[:up_next_title].present? 
+    @performance.up_next_song = Song.find_by(external_id: params[:up_next_song]) if params[:up_next_song].present? 
     @performance.up_next_user = params[:up_next_singer] if params[:up_next_singer].present? 
 
     if params[:id].present?
