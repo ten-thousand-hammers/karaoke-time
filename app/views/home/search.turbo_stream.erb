@@ -7,7 +7,7 @@
             <table class="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">ID</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0 hidden md:visible">ID</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
                 </tr>
@@ -15,7 +15,7 @@
               <tbody class="divide-y divide-gray-200">
                 <% @results.each do |result| %>
                   <tr>
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"><%= result["id"] %></td>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0 hidden md:visible"><%= result["id"] %></td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= link_to result["title"], result["url"] %></td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <%= link_to "Play", play_url(id: result["id"]), class: "underlined" %>
