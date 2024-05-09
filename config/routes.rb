@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   post "search" => "home#search"
   get "play" => "home#play"
   get "splash" => "home#splash"
+  get "qrcode" => "home#qrcode"
 end

@@ -3,7 +3,7 @@ import consumer from "channels/consumer"
 
 // Connects to data-controller="splash"
 export default class extends Controller {
-  static targets = [ "video", "permissions" ]
+  static targets = [ "top", "title", "singer", "video", "permissions", "upNext", "upNextTitle", "upNextSinger" ]
 
   initialize() {
     console.log("initialize")
@@ -21,15 +21,31 @@ export default class extends Controller {
     
       received(data) {
         if (data["event"] == "play") {
-          splashController.play(data["url"])
+          splashController.play(data["url"], data["title"], data["singer"])
+        } else if (data["event"] == "queue") {
+          splashController.queue(data["title"], data["singer"])
         }
-        // Called when there's incoming data on the websocket for this channel
       }
     });
   }
 
-  play(url) {
+  queue(title, singer) {
+    this.upNextTitleTarget.textContent = title
+    this.upNextSingerTarget.textContent = singer
+    this.upNextTarget.classList.remove("hidden")
+  }
+
+  play(url, title, singer) {
     console.log(`play: ${url}`)
+
+    this.topTarget.classList.add("absolute")
+    this.topTarget.classList.remove("hidden")
+
+    this.titleTarget.textContent = title
+    this.singerTarget.textContent = singer
+
+    this.upNextTarget.classList.add("hidden")
+
     this.videoTarget.src = url
     this.videoTarget.load()
     this.videoTarget.classList.remove("hidden")
