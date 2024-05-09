@@ -1,10 +1,14 @@
 <div data-controller="splash" class="bg-[#09283b] h-screen w-screen">
-  <div id="top-container" data-splash-target="top" class="absolute hidden w-full z-10">
+  <div id="top-container" data-splash-target="top" class="absolute <%= @now_playing_title.present? ? '' : 'hidden' %> w-full z-10">
     <div id="now-playing" class="p-4 text-right text-xl">
-      <p id="now-playing-song" data-splash-target="title" class="text-white" style="margin-bottom: 5px"></p>
+      <p id="now-playing-song" 
+         data-splash-target="title" 
+         class="text-white" 
+         style="margin-bottom: 5px"><%= @now_playing_title %></p>
       <div class="text-green-500">
         <i class="fa-solid fa-microphone" title="Current singer"></i>&nbsp;
-        <span id="now-playing-singer" data-splash-target="singer"></span>
+        <span id="now-playing-singer" 
+              data-splash-target="singer"><%= @now_playing_singer %></span>
       </div>
     </div>
   </div>
@@ -27,26 +31,27 @@
           <div>&nbsp;<%= server_url %></div>
         </div>
       </div>
-      <div id="up-next" data-splash-target="upNext" class="hidden text-white text-xl stroke ml-auto text-right">
+      <div id="up-next" data-splash-target="upNext" class="<%= @up_next_title.present? ? '' : 'hidden' %> text-white text-xl stroke ml-auto text-right">
         <div>
-          <b class="text-white">Up next: <span data-splash-target="upNextTitle" class="text-green-500"></span></b>
+          <b class="text-white">Up next: <span data-splash-target="upNextTitle" class="text-amber-500 font-normal"><%= @up_next_title %></span></b>
           <span id="up-next-song"></span>
           <div>
-            <b class="text-white">Next singer: </b>&nbsp;<i class="fa-solid fa-microphone text-green-500" title="Next singer"></i>&nbsp;<span data-splash-target="upNextSinger" id="up-next-singer" class="text-green-500">Nate</span>
+            <b class="text-white">Next singer: </b>&nbsp;<i class="fa-solid fa-microphone text-green-500" title="Next singer"></i>&nbsp;<span data-splash-target="upNextSinger" id="up-next-singer" class="text-green-500 font-normal"><%= @up_next_singer %></span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div data-splash-target="permissions" class="absolute w-full">
-    <div class="absolute flex items-center h-screen p-20 bg-black">
-      <p class="text-white text-center text-xl">
-        Due to limititations with browser permissions, you must interact with the page once before it allows autoplay of videos. Karaoke Time will not play otherwise. Click the button below to <a data-action="click->splash#acceptPermissions" href="javascript:" class="underlined text-green-500">confirm</a>.
-        <br/>
-        <button class="opacity-100 mt-4 rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" data-action="click->splash#acceptPermissions">Confirm</button>
-      </p>
+  <div data-splash-target="permissions" class="absolute h-screen w-screen bg-black">
+    <div class="m-auto max-w-3xl">
+      <div class="flex items-center p-20 h-screen bg-black">
+        <p class="text-white text-center text-xl">
+          Due to limititations with browser permissions, you must interact with the page once before it allows autoplay of videos. Karaoke Time will not play otherwise. Click the button below to <a data-action="click->splash#acceptPermissions" href="javascript:" class="underlined text-green-500">confirm</a>.
+          <br/>
+          <button class="opacity-100 mt-4 rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" data-action="click->splash#acceptPermissions">Confirm</button>
+        </p>
+      </div>
     </div>
-    <div class="bg-black h-screen w-screen"></div>
   </div>
 </div>

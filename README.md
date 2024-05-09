@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Test URLs
 
-Things you may want to cover:
+[Now Playing](http://localhost:3000/splash?now_playing_title=Jason%20Mraz%20-%20I%27m%20Yours%20(Karaoke%20Version)&now_playing_singer=Nate)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[Up Next](http://localhost:3000/splash?up_next_title=Jason%20Mraz%20-%20I%27m%20Yours%20(Karaoke%20Version)&up_next_singer=Nate)

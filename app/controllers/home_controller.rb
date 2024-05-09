@@ -23,6 +23,12 @@ class HomeController < ApplicationController
   end
 
   def splash
+    @now_playing_title = params[:now_playing_title]
+    @now_playing_singer = params[:now_playing_singer]
+
+    @up_next_title = params[:up_next_title]
+    @up_next_singer = params[:up_next_singer]
+
     if params[:id].present?
       QueueVideoJob.set(wait: 5.seconds).perform_later(params[:id], "Jason Mraz - I'm Yours (Karaoke Version)", "Nate")
     end
