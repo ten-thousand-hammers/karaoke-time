@@ -10,15 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_024847) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_123815) do
   create_table "performances", force: :cascade do |t|
-    t.string "now_playing_song"
     t.string "now_playing_user"
-    t.string "up_next_song"
     t.string "up_next_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "now_playing_url"
+    t.integer "up_next_song_id"
+    t.integer "now_playing_song_id"
+    t.index ["now_playing_song_id"], name: "index_performances_on_now_playing_song_id"
+    t.index ["up_next_song_id"], name: "index_performances_on_up_next_song_id"
   end
 
+  create_table "songs", force: :cascade do |t|
+    t.string "external_id"
+    t.string "name"
+    t.string "url"
+    t.float "duration"
+    t.json "thumbnails"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "path"
+  end
+
+  add_foreign_key "performances", "songs", column: "now_playing_song_id"
+  add_foreign_key "performances", "songs", column: "up_next_song_id"
 end

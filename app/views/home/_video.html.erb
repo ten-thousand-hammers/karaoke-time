@@ -2,11 +2,11 @@
   <video 
    data-splash-target="video" 
    autoplay 
-   class="<%= performance.now_playing_url.present? ? '' : 'hidden' %> h-screen w-screen"
+   class="<%= performance.now_playing_song.present? ? '' : 'hidden' %> h-screen w-screen"
    data-action="ended->splash#ended">
     <source 
      type="video/mp4" 
-     src="<%= performance.now_playing_url %>"
+     src="<%= performance.now_playing_song&.path %>"
      />
   </video>
 <% end %>

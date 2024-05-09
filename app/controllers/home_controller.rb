@@ -10,14 +10,28 @@ class HomeController < ApplicationController
     cmd = ["yt-dlp", "-j", "--no-playlist", "--flat-playlist", %(ytsearch10:"#{search_term} karaoke")].join(" ")
     puts cmd
     response = `#{cmd}`
+
     @results = response
       .split("\n")
       .map { |line| JSON.parse(line) }
       .select { |obj| obj["title"].present? && obj["url"].present? }
+
+    @results.each do |item|
+      song = Song.find_or_create_by(external_id: item["id"]) do |s|
+        s.name = item["title"]
+        s.url = item["url"]
+        s.duration = item["duration"]
+        s.thumbnails = item["thumbnails"]
+      end
+    end
   end
 
   def play
-    QueueVideoJob.perform_later(params[:id], params[:title], "Nate")
+    permitted_params = params.permit(:id)
+    QueueVideoJob.perform_later(
+      permitted_params[:id],
+      "Nate"
+    )
 
     head :no_content
   end

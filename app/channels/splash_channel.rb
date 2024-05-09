@@ -14,9 +14,10 @@ class SplashChannel < ApplicationCable::Channel
 
   def ended(_data)
     Performance.instance.update!(
-      now_playing_url: nil,
-      now_playing_song: nil,
-      now_playing_user: nil
+      now_playing_song: Performance.instance.up_next_song,
+      now_playing_user: Performance.instance.up_next_user,
+      up_next_song: nil,
+      up_next_user: nil
     )
   end
 end

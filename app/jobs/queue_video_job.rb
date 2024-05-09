@@ -1,13 +1,11 @@
 class QueueVideoJob < ApplicationJob
   queue_as :default
 
-  def perform(id, title, singer)
+  def perform(external_id, singer)
     ext = "mp4"
 
-    Performance.instance.update!(
-      up_next_song: title,
-      up_next_user: singer
-    )
+    song = Song.find_by(external_id: external_id) 
+
 
     # ActionCable.server.broadcast(
     #   "splash", 
@@ -17,19 +15,29 @@ class QueueVideoJob < ApplicationJob
     #     "singer": singer
     #   }
     # )
-    sleep 5
     
-    video_url = "https://www.youtube.com/watch?v=#{id}"
-    destination_path = File.join("public", "videos", "#{title}---#{id}.#{ext}")
-    DownloadVideoJob.perform_now(video_url) unless File.exist?(destination_path)
+    
+    video_url = "https://www.youtube.com/watch?v=#{song.external_id}"
+    destination_path = File.join("public", "videos", "#{song.name}---#{song.external_id}.#{ext}")
+    unless File.exist?(destination_path)
+      DownloadVideoJob.perform_now(video_url)
+      song.update!(path: File.join("videos", "#{song.name}---#{song.external_id}.#{ext}"))
+    end
 
     Performance.instance.update!(
-      up_next_song: nil,
-      up_next_user: nil,
-      now_playing_url: File.join("videos", "#{title}---#{id}.#{ext}"),
-      now_playing_song: title,
-      now_playing_user: singer,
+      up_next_song: song,
+      up_next_user: singer
     )
+    sleep 5
+
+    unless Performance.instance.now_playing_song.present?
+      Performance.instance.update!(
+        up_next_song: nil,
+        up_next_user: nil,
+        now_playing_song: song,
+        now_playing_user: singer,
+      )
+    end
 
     # ActionCable.server.broadcast(
     #   "splash", 
