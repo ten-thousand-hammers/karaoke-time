@@ -1,17 +1,6 @@
-<div data-controller="splash" class="bg-[#09283b] h-screen w-screen">
-  <div id="top-container" data-splash-target="top" class="absolute <%= @now_playing_title.present? ? '' : 'hidden' %> w-full z-10">
-    <div id="now-playing" class="p-4 text-right text-xl">
-      <p id="now-playing-song" 
-         data-splash-target="title" 
-         class="text-white" 
-         style="margin-bottom: 5px"><%= @now_playing_title %></p>
-      <div class="text-green-500">
-        <i class="fa-solid fa-microphone" title="Current singer"></i>&nbsp;
-        <span id="now-playing-singer" 
-              data-splash-target="singer"><%= @now_playing_singer %></span>
-      </div>
-    </div>
-  </div>
+<%= turbo_stream_from "splash" %>
+<div data-controller="splash" data-splash-state-value="idle" class="bg-[#09283b] h-screen w-screen">
+  <%= render "now_playing", performance: @performance %>
 
   <div id="logo-container" class="absolute w-full">
     <div class="flex justify-center items-center h-screen">
@@ -19,9 +8,7 @@
     </div>
   </div>
   
-  <video data-splash-target="video" autoplay class="absolute hidden h-screen w-screen">
-    <source id="video-source" type="video/mp4" src="" />
-  </video>
+  <%= render "video", performance: @performance %>
 
   <div id="bottom-container" class="absolute fixed bottom-0 w-full">
     <div class="flex justify-between items-end m-4">
@@ -31,19 +18,11 @@
           <div>&nbsp;<%= server_url %></div>
         </div>
       </div>
-      <div id="up-next" data-splash-target="upNext" class="<%= @up_next_title.present? ? '' : 'hidden' %> text-white text-xl stroke ml-auto text-right">
-        <div>
-          <b class="text-white">Up next: <span data-splash-target="upNextTitle" class="text-amber-500 font-normal"><%= @up_next_title %></span></b>
-          <span id="up-next-song"></span>
-          <div>
-            <b class="text-white">Next singer: </b>&nbsp;<i class="fa-solid fa-microphone text-green-500" title="Next singer"></i>&nbsp;<span data-splash-target="upNextSinger" id="up-next-singer" class="text-green-500 font-normal"><%= @up_next_singer %></span>
-          </div>
-        </div>
-      </div>
+      <%= render "up_next", performance: @performance %>
     </div>
   </div>
 
-  <div data-splash-target="permissions" class="absolute h-screen w-screen bg-black">
+  <div data-splash-target="permissions" class="absolute h-screen w-screen bg-black z-20">
     <div class="m-auto max-w-3xl">
       <div class="flex items-center p-20 h-screen bg-black">
         <p class="text-white text-center text-xl">

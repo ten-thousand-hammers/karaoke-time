@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "up_next", class: "#{performance.up_next_song.present? ? '' : 'hidden'} text-white text-xl stroke ml-auto text-right", data: { splash_target: "upNext" } do %>
+  <div>
+    <b class="text-white">Up next: <span data-splash-target="upNextTitle" class="text-amber-500 font-normal"><%= performance.up_next_song %></span></b>
+    <span id="up-next-song"></span>
+    <div>
+    <b class="text-white">Next singer: </b>&nbsp;<i class="fa-solid fa-microphone text-green-500" title="Next singer"></i>&nbsp;<span data-splash-target="upNextSinger" id="up-next-singer" class="text-green-500 font-normal"><%= performance.up_next_user %></span>
+    </div>
+  </div>
+<% end %>

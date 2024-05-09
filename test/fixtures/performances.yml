@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  now_playing_song: one
+  now_playing_user: one
+  up_next_song: one
+  up_next_user: one
+
+two:
+  now_playing_song: two
+  now_playing_user: two
+  up_next_song: two
+  up_next_user: two
