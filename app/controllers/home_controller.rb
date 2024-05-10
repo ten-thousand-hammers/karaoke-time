@@ -1,6 +1,4 @@
 class HomeController < ApplicationController
-  helper_method :server_url
-
   include Secured
 
   def index
@@ -31,10 +29,9 @@ class HomeController < ApplicationController
 
   def play
     permitted_params = params.permit(:id)
-    QueueVideoJob.perform_later(
-      permitted_params[:id],
-      "Nate"
-    )
+    song = Song.find_by(external_id: permitted_params[:id]) 
+
+    QueueVideoJob.perform_later(song, current_user)
 
     head :no_content
   end
@@ -54,14 +51,5 @@ class HomeController < ApplicationController
       size: 120
     )
     send_data png.to_s, type: 'image/png', disposition: 'inline'
-  end
-
-  private
-
-  def server_url
-    uri = URI.parse(request.original_url)
-    uri.path = ""
-    uri.query = nil
-    uri.to_s
   end
 end

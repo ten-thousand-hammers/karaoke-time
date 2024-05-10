@@ -3,7 +3,7 @@
     <b class="text-white">Up next: <span data-splash-target="upNextTitle" class="text-amber-500 font-normal"><%= performance.up_next_song&.name %></span></b>
     <span id="up-next-song"></span>
     <div>
-    <b class="text-white">Next singer: </b>&nbsp;<i class="fa-solid fa-microphone text-green-500" title="Next singer"></i>&nbsp;<span data-splash-target="upNextSinger" id="up-next-singer" class="text-green-500 font-normal"><%= performance.up_next_user %></span>
+    <b class="text-white">Next singer: </b>&nbsp;<i class="fa-solid fa-microphone text-green-500" title="Next singer"></i>&nbsp;<span data-splash-target="upNextSinger" id="up-next-singer" class="text-green-500 font-normal"><%= performance.up_next_user&.nickname %></span>
     </div>
   </div>
 <% end %>
