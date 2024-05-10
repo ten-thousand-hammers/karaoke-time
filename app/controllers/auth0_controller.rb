@@ -5,13 +5,18 @@ class Auth0Controller < ApplicationController
     # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].
     # Refer to https://github.com/auth0/omniauth-auth0#authentication-hash for complete information on 'omniauth.auth' contents.
     session[:userinfo] = request.env['omniauth.auth']['extra']['raw_info']
-    User.find_or_create_by(email: session[:userinfo]["email"]) do |user|
+    user = User.find_or_initialize_by(email: session[:userinfo]["email"])
+
+    if user.new_record?
       user.name = session[:userinfo]["name"]
       user.picture = session[:userinfo]["picture"]
       user.nickname = user.name
-    end
+      user.save!
 
-    redirect_to '/'
+      redirect_to edit_profile_url(user)
+    else
+      redirect_to search_url
+    end
   end
 
   # if user authentication fails on the provider side OmniAuth will redirect to /auth/failure,

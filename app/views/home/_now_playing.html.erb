@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "now_playing" do %>
+  <h3 class="text-xl text-amber-500">
+    <% if performance.now_playing_song.present? %>
+      <%= performance.now_playing_song.name %>
+      <%= link_to "Skip", skip_path, data: { turbo_method: :post, turbo_confirm: "Are you sure?" }, class: "text-teal-400" %>
+    <% else %>
+      Nothing is playing right now.
+    <% end %>
+  </h3>
+<% end %>

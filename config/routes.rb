@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
 
-  post "search" => "home#search"
-  get "play" => "home#play"
+  get "search" => "search#index"
+  post "search" => "search#index"
+  post "play" => "search#play"
+  
   get "splash" => "splash#index"
+
+  post "skip" => "home#skip"
   get "qrcode" => "home#qrcode"
 
   get '/auth/auth0/callback' => 'auth0#callback'

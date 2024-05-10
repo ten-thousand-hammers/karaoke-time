@@ -15,6 +15,11 @@ class Performance < ApplicationRecord
         locals: { performance: self }, 
         target: "now_playing"
 
+      broadcast_replace_to "home", 
+        partial: "home/now_playing", 
+        locals: { performance: self }, 
+        target: "now_playing"
+
       broadcast_replace_to "splash", 
         partial: "splash/video", 
         locals: { performance: self }, 
@@ -26,6 +31,11 @@ class Performance < ApplicationRecord
           partial: "splash/up_next", 
           locals: { performance: self }, 
           target: "up_next"
+
+      broadcast_replace_to "home", 
+        partial: "home/up_next", 
+        locals: { performance: self }, 
+        target: "up_next"
     end
   }
 end

@@ -1,7 +1,9 @@
                                   Prefix Verb  URI Pattern                                                                                       Controller#Action
                       rails_health_check GET   /up(.:format)                                                                                     rails/health#show
                                     root GET   /                                                                                                 home#index
-                                  search POST  /search(.:format)                                                                                 home#search
+                                  search GET   /search(.:format)                                                                                 search#index
+                                         POST  /search(.:format)                                                                                 search#index
+                                    skip POST  /skip(.:format)                                                                                   home#skip
                                     play GET   /play(.:format)                                                                                   home#play
                                   splash GET   /splash(.:format)                                                                                 splash#index
                                   qrcode GET   /qrcode(.:format)                                                                                 home#qrcode
