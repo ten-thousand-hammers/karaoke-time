@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'auth0#failure'
   get '/auth/logout' => 'auth0#logout'
   get '/auth/redirect' => 'auth0#redirect'
+
+  resources :profile, only: [:edit, :update]
 end
