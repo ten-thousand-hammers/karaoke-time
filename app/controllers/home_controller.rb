@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
-  include Secured
-
   def index
   end
 
   def skip
+    redirect_to '/auth/redirect/' unless session[:userinfo].present?
+
     NextVideoJob.perform_later
     head :no_content
   end

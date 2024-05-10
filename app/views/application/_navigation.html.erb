@@ -1,6 +1,6 @@
+<%= link_to "Home", root_url, class: "underline text-blue-500" %>
+- <%= link_to "Search", search_url, class: "underline text-blue-500" %> 
 <% if user_signed_in? %>
-  <%= link_to "Home", root_url, class: "underline text-blue-500" %> - 
-  <%= link_to "Search", search_url, class: "underline text-blue-500" %> - 
-  <%= link_to "Profile", edit_profile_url(current_user), class: "underline text-blue-500" %> - 
-  <%= link_to "Logout", auth_logout_url, class: "underline text-blue-500" %>
+  - <%= link_to "Profile", edit_profile_url(current_user), class: "underline text-blue-500" %>
+  - <%= link_to "Logout", auth_logout_url, class: "underline text-blue-500" %>
 <% end %>

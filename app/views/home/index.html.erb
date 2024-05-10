@@ -2,7 +2,9 @@
 
 <main class="container mx-auto mt-28 px-5">
   <div class="text-center mb-4">
-    <h1 class="">Welcome, <%= current_user&.nickname %></h1>
+    <% if user_signed_in? %>
+      <h1 class="">Welcome, <%= current_user&.nickname %></h1>
+    <% end %>
     <%= render "navigation" %>
   </div>
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -4,10 +4,10 @@ class QueueVideoJob < ApplicationJob
   def perform(song, user)
     ext = "mp4"
 
-    destination_path = File.join("public", "videos", "#{song.name}---#{song.external_id}.#{ext}")
+    destination_path = File.join("public", "videos", "#{song.external_id}.#{ext}")
     unless File.exist?(destination_path)
       DownloadVideoJob.perform_now("https://www.youtube.com/watch?v=#{song.external_id}")
-      song.update!(path: File.join("videos", "#{song.name}---#{song.external_id}.#{ext}"))
+      song.update!(path: File.join("videos", "#{song.external_id}.#{ext}"))
     end
 
     if Performance.instance.up_next_song.present?
