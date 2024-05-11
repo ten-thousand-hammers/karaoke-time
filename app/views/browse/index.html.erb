@@ -1,12 +1,45 @@
-<% content_for(:body_attributes) do %> class="bg-[#09283b]" } <% end %>
-
-<div>
-  <main class="container mx-auto mt-28 px-5">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl">
+<% content_for(:body_attributes) do %> class="bg-[#09283b] text-white" } <% end %>
+  <%= turbo_stream_from "home" %>
+  
+  <div>
+    <main class="container mx-auto px-4 mb-16">
+      <div class="m-4 mt-14">
+        <div class="flex justify-center items-center w-32 h-32 m-auto">
+          <img class="" src="/logo3.png" width="500px" alt="logo" />
+        </div>
       </div>
-    </div>
-  </main>
+  
+      <div class="p-8 space-y-8">
+        <h1 class="text-2xl">Browse</h1>
 
-  <%= render "navigation" %>
-</div>
+        <div class="table w-full">
+          <div class="table-header-group">
+            <div class="table-row">
+              <div class="table-cell text-left p-2 font-bold">Song</div>
+              <div class="table-cell text-left hidden">Artist</div>
+              <div class="table-cell text-left"></div>
+            </div>
+          </div>
+          <div class="table-row-group">
+            <% @songs.each do |song| %>
+            <div class="table-row even:bg-blue-950 odd:[#09283b]">
+              <div class="table-cell pt-2 px-2 pb-1"><%= song.name %></div>
+              <div class="table-cell hidden"></div>
+              <div class="table-cell pt-2 px-2 pb-1 align-middle">
+                <%= link_to play_url(id: song.external_id), class: "", data: { turbo_method: :post } do %>
+                  <i class="fa-solid fa-circle-plus text-2xl text-blue-600"></i>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+
+          <div class="mt-6 text-white">
+            <%= paginate @songs %>
+          </div>
+        </div>
+      </div>
+    </main>
+  
+    <%= render "navigation" %>
+  </div>

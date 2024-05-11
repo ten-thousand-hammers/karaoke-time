@@ -1,0 +1,14 @@
+<%# Link to the "Previous" page
+  - available local variables
+    url:           url to the previous page
+    current_page:  a page object for the currently displayed page
+    total_pages:   total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+-%>
+<% unless current_page.first? %>
+  <%= link_to url, remote: remote, rel: 'prev', class: "relative inline-flex items-center px-6 py-6 text-indigo-400 ring-1 ring-inset ring-indigo-300 hover:bg-indigo-50 focus:z-20 focus:outline-offset-0" do %>
+  <span class="sr-only"><%= t('views.pagination.previous').html_safe %></span>
+  <i class="fa-solid fa-angle-left"></i>
+  <% end %>
+<% end %>
