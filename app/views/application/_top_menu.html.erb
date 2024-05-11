@@ -1,0 +1,5 @@
+<% if user_signed_in? %>
+  <div class="w-full px-4 py-2 bg-blue-900">
+    <span class="">Singer:</span> <span class="text-green-500"><%= current_user&.nickname %></span>
+  </div>
+<% end %>

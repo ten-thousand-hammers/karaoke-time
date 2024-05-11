@@ -1,20 +1,33 @@
-<% content_for(:body_attributes) do %> class="bg-[#09283b]" } <% end %>
+<% content_for(:body_attributes) do %> class="bg-[#09283b] text-white" } <% end %>
 
 <div>
-  <main class="container mx-auto mt-28 px-5">
-    <div class="text-center mb-4 text-white">
-      <h1 class="">Welcome, <%= current_user&.nickname %></h1>
+  <div id="flash" class="fixed top-0 w-full">
+    <%= render "alerts" %>
+  </div>
+
+  <%= render "top_menu" %>
+
+  <main class="container mx-auto px-4 mb-24">
+    <div class="m-4 mt-14">
+      <div class="flex justify-center items-center w-32 h-32 m-auto">
+        <img class="" src="/logo3.png" width="500px" alt="logo" />
+      </div>
     </div>
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl">
+
+    <div class="space-y-8">
+      <h1 class="text-2xl pl-2">Search</h1>
+
+      <div class="pl-2">
         <%= form_with(url: search_url) do |form| %>
-          <%= form.text_field :search, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-          <div class="mt-2 text-center">
+          <%= form.text_field :search, class: "block w-full rounded-md border-0 py-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+          <div class="mt-2">
             <%= form.submit "Search", class: "rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
           </div>
         <% end %>
 
-        <%= turbo_frame_tag "results" %>
+        <div class="mt-4">
+          <%= render "results" %>
+        </div>
       </div>
     </div>
   </main>
