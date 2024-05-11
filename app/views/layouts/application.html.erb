@@ -11,7 +11,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body <%= yield :body_attributes %>>
     <%= yield %>
   </body>
 </html>

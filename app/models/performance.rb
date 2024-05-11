@@ -3,6 +3,7 @@ class Performance < ApplicationRecord
   belongs_to :up_next_user, class_name: "User", optional: true
   belongs_to :now_playing_song, class_name: "Song", optional: true
   belongs_to :now_playing_user, class_name: "User", optional: true
+  has_many :acts
 
   def self.instance
     first || create

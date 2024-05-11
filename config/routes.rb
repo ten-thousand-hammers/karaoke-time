@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   get '/auth/redirect' => 'auth0#redirect'
 
   resources :profile, only: [:edit, :update]
+  resources :browse, only: [:index]
 end

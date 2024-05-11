@@ -1,6 +1,35 @@
-<%= link_to "Home", root_url, class: "underline text-blue-500" %>
-- <%= link_to "Search", search_url, class: "underline text-blue-500" %> 
-<% if user_signed_in? %>
-  - <%= link_to "Profile", edit_profile_url(current_user), class: "underline text-blue-500" %>
-  - <%= link_to "Logout", auth_logout_url, class: "underline text-blue-500" %>
-<% end %>
+<footer class="fixed bottom-0 w-full bg-blue-800 text-white p-4">
+  <div class="flex justify-between">
+    <div>
+      <%= link_to root_url do %>
+        <i class="text-3xl w-16 fa-solid fa-house-user"></i>
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to browse_index_url do %>
+        <i class="text-3xl w-16 fa-solid fa-music"></i>
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to search_url do %>
+      <i class="text-3xl w-16 fa-solid fa-magnifying-glass"></i>
+      <% end %>
+    </div>
+
+    <% if user_signed_in? %>
+      <div>
+        <%= link_to edit_profile_url(current_user) do %>
+          <i class="text-3xl w-16 fa-regular fa-face-smile"></i>
+        <% end %>
+      </div>
+
+      <div>
+        <%= link_to auth_logout_url do %>
+          <i class="text-3xl w-16 fa-solid fa-arrow-right-to-bracket"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</footer>

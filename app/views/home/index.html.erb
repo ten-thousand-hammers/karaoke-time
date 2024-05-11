@@ -1,25 +1,31 @@
+<% content_for(:body_attributes) do %> class="bg-[#09283b]" } <% end %>
 <%= turbo_stream_from "home" %>
 
-<main class="container mx-auto mt-28 px-5">
-  <div class="text-center mb-4">
-    <% if user_signed_in? %>
-      <h1 class="">Welcome, <%= current_user&.nickname %></h1>
-    <% end %>
-    <%= render "navigation" %>
-  </div>
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="mx-auto max-w-4xl">
-      <div class="bg-black p-8 space-y-8">
-        <div>
-          <h2 class="text-2xl text-white">Now Playing</h2>
-          <%= render "now_playing", performance: Performance.instance %>
-        </div>
-
-        <div>
-          <h2 class="text-2xl text-white">Next Song</h2>
-          <%= render "up_next", performance: Performance.instance %>
-        </div>
+<div>
+  <main class="container mx-auto px-4">
+    <div class="m-4 mt-14">
+      <div class="flex justify-center items-center w-64 h-64 m-auto">
+        <img class="" src="/logo3.png" width="500px" alt="logo" />
       </div>
     </div>
-  </div>
-</main>
+
+    <div class="p-8 space-y-8">
+      <div>
+        <h2 class="text-2xl text-white">Now Playing</h2>
+        <%= render "now_playing", performance: Performance.instance %>
+      </div>
+
+      <div>
+        <h2 class="text-2xl text-white">Next Song</h2>
+        <%= render "up_next", performance: Performance.instance %>
+      </div>
+
+      <div>
+        <h2 class="text-2xl text-white">Queue</h2>
+        <%= render "queue", performance: Performance.instance %>
+      </div>
+    </div>
+  </main>
+
+  <%= render "navigation" %>
+</div>

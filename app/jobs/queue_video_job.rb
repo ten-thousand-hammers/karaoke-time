@@ -11,7 +11,7 @@ class QueueVideoJob < ApplicationJob
     end
 
     if Performance.instance.up_next_song.present?
-      Act.create!(song: song, user: user)
+      Act.create!(performance: Performance.instance, song: song, user: user)
     else
       Performance.instance.update!(
         up_next_song: song,
