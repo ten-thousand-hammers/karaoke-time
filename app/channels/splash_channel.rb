@@ -9,7 +9,7 @@ class SplashChannel < ApplicationCable::Channel
   end
 
   def presence(data)
-    puts data
+    # puts data
   end
 
   def ended(_data)

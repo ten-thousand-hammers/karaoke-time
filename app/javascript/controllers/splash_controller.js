@@ -42,7 +42,7 @@ export default class extends Controller {
       },
 
       ping(state) {
-        this.perform("presence", { state: state })
+        // this.perform("presence", { state: state })
       },
 
       ended() {
