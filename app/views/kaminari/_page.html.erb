@@ -9,9 +9,9 @@
 -%>
 <% class_names = "relative #{page.first? && page.current? ? 'rounded-l-md' : ''} #{page.last? && page.current? ? 'rounded-r-md' : ''} inline-flex items-center px-8 py-6 text-sm font-semibold " %>
 <% if page.current? %>
-  <% class_names += "z-10 bg-indigo-600 text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+  <% class_names += "z-10 bg-blue-600 text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" %>
 <% else %>
-  <% class_names += "text-indigo-300 ring-1 ring-inset ring-indigo-300 hover:bg-indigo-50 focus:z-20 focus:outline-offset-0" %>
+  <% class_names += "text-blue-300 ring-1 ring-inset ring-blue-300 hover:bg-blue-50 focus:z-20 focus:outline-offset-0" %>
 <% end %>
 <%= link_to url, remote: remote, rel: page.rel, class: class_names do %>
   <%= page %>
