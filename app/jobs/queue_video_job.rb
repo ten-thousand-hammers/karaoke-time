@@ -21,12 +21,6 @@ class QueueVideoJob < ApplicationJob
     
     return if Performance.instance.now_playing_song.present?
     
-    sleep 5
-    Performance.instance.update!(
-      up_next_song: nil,
-      up_next_user: nil,
-      now_playing_song: song,
-      now_playing_user: user,
-    )
+    NextVideoJob.perform_later
   end
 end
