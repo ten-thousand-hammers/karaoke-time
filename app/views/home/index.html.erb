@@ -2,7 +2,13 @@
 <%= turbo_stream_from "home" %>
 
 <div>
-  <main class="container mx-auto px-4 mb-16">
+  <div id="flash" class="fixed top-0 z-20 w-full">
+    <%= render "alerts" %>
+  </div>
+
+  <%= render "top_menu" %>
+
+  <main class="container mx-auto px-4 mt-20 mb-24">
     <div class="m-4 mt-14">
       <div class="flex justify-center items-center w-64 h-64 m-auto">
         <img class="" src="/logo3.png" width="500px" alt="logo" />

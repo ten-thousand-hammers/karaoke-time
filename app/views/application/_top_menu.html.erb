@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <div class="w-full px-4 py-2 bg-blue-900">
+  <div class="fixed top-0 z-10 w-full px-4 py-2 bg-blue-900 text-white">
     <span class="">Singer:</span> <span class="text-green-500"><%= current_user&.nickname %></span>
   </div>
 <% end %>
