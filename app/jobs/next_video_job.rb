@@ -10,7 +10,7 @@ class NextVideoJob < ApplicationJob
       up_next_song: next_act&.song,
       up_next_user: next_act&.user
     )
-    up_next_song.increment!(:plays)
+    up_next_song.increment!(:plays) if up_next_song.present?
     next_act.destroy! if next_act.present?
   end
 end
