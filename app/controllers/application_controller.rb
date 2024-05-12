@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
   end
 
   def server_url
+    return ENV["SERVER_URL"] if ENV["SERVER_URL"].present?
+    
     uri = URI.parse(request.original_url)
     uri.path = ""
     uri.query = nil
