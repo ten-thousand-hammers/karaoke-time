@@ -7,6 +7,7 @@ namespace :reset do
       now_playing_user: nil
     )
     Act.destroy_all
+    UserSong.destroy_all
     Song.destroy_all
     FileUtils.rm_rf(Rails.root.join("public", "videos"))
   end
