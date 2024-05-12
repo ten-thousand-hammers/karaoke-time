@@ -85,6 +85,9 @@ export default class extends Controller {
 
   acceptPermissions() {
     this.permissionsTarget.classList.add("hidden")
+    if (this.videoTarget.querySelector("source").src) {
+      this.videoTarget.play()
+    }
   }
 
   connect() {
