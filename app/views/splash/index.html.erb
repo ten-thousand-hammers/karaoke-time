@@ -1,6 +1,9 @@
 <%= turbo_stream_from "splash" %>
 
-<div data-controller="splash" data-splash-state-value="idle" class="bg-blue-950 h-screen w-screen">
+<div data-controller="splash" 
+     data-splash-state-value="idle"
+     data-action="mousemove->splash#mousemove"
+     class="bg-blue-950 h-screen w-screen">
   <%= render "now_playing", performance: @performance %>
 
   <div id="logo-container" class="absolute w-full">

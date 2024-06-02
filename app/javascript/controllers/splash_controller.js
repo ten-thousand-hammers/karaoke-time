@@ -53,6 +53,23 @@ export default class extends Controller {
     this.splashChannel.ping();
   }
 
+  mousemove() {
+    if (this.mouseTimer) {
+      window.clearTimeout(this.mouseTimer);
+    }
+
+    if (!this.cursorVisible) {
+      document.body.style.cursor = "default";
+      this.cursorVisible = true;
+    }
+
+    this.mouseTimer = window.setTimeout(() => {
+      this.mouseTimer = null;
+      document.body.style.cursor = "none";
+      this.cursorVisible = false;
+    }, 5000);
+  }
+
   queue(title, singer) {
     this.upNextTitleTarget.textContent = title
     this.upNextSingerTarget.textContent = singer
