@@ -13,6 +13,6 @@ class SplashChannel < ApplicationCable::Channel
   end
 
   def ended(_data)
-    NextVideoJob.perform_later
+    NextVideoJob.set(wait: 5.seconds).perform_later
   end
 end
