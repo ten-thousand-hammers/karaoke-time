@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "up_next", class: "#{performance.up_next_song.present? ? '' : 'hidden'} text-white text-xl stroke ml-auto text-right", data: { splash_target: "upNext" } do %>
+<%= turbo_frame_tag "up_next", class: "#{performance.up_next_song.present? ? '' : 'hidden'} text-white text-xl lg:text-4xl stroke ml-auto text-right", data: { splash_target: "upNext" } do %>
   <div class="bg-black p-4 rounded-xl bg-opacity-60 text-opacity-100">
     <b class="text-white">Up next: <span data-splash-target="upNextTitle" class="text-amber-500 font-normal"><%= performance.up_next_song&.name %></span></b>
     <span id="up-next-song"></span>
