@@ -76,4 +76,5 @@ Rails.application.configure do
 
   ###### CUSTOM
   config.active_job.queue_adapter = :async
+  config.hosts << "karaoke.palmer.test"
 end

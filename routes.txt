@@ -3,9 +3,9 @@
                                     root GET   /                                                                                                 home#index
                                   search GET   /search(.:format)                                                                                 search#index
                                          POST  /search(.:format)                                                                                 search#index
-                                    skip POST  /skip(.:format)                                                                                   home#skip
-                                    play GET   /play(.:format)                                                                                   home#play
+                                    play POST  /play(.:format)                                                                                   search#play
                                   splash GET   /splash(.:format)                                                                                 splash#index
+                                    skip POST  /skip(.:format)                                                                                   home#skip
                                   qrcode GET   /qrcode(.:format)                                                                                 home#qrcode
                      auth_auth0_callback GET   /auth/auth0/callback(.:format)                                                                    auth0#callback
                             auth_failure GET   /auth/failure(.:format)                                                                           auth0#failure
@@ -14,6 +14,7 @@
                             edit_profile GET   /profile/:id/edit(.:format)                                                                       profile#edit
                                  profile PATCH /profile/:id(.:format)                                                                            profile#update
                                          PUT   /profile/:id(.:format)                                                                            profile#update
+                            browse_index GET   /browse(.:format)                                                                                 browse#index
         turbo_recede_historical_location GET   /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
         turbo_resume_historical_location GET   /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
        turbo_refresh_historical_location GET   /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh

@@ -20,6 +20,18 @@ export default class extends Controller {
       this.stateValue = "idle"
     });
 
+    let permissionVideo = this.permissionsTarget.querySelector("video");
+    var permissionVideoPromise = permissionVideo.play();
+    if (permissionVideoPromise !== undefined) {
+      permissionVideoPromise.then(_ => {
+        // Autoplay started!
+        this.acceptPermissions();
+      }).catch(error => {
+        // Autoplay not allowed!
+        permissionVideo.classList.add("hidden")
+      });
+    }
+
     let splashController = this;
     this.splashChannel = consumer.subscriptions.create({ channel: "SplashChannel" }, {
       connected() {

@@ -29,7 +29,15 @@
   <div data-splash-target="permissions" class="absolute h-screen w-screen bg-black z-20">
     <div class="m-auto max-w-3xl">
       <div class="flex items-center p-20 h-screen bg-black">
+        <video class="w-10 h-10 text-center">
+          <source 
+          type="video/mp4" 
+          src="/sample.mp4"
+          />
+        </video>
         <p class="text-white text-center text-xl">
+          
+
           Due to limititations with browser permissions, you must interact with the page once before it allows autoplay of videos. Karaoke Time will not play otherwise. Click the button below to <a data-action="click->splash#acceptPermissions" href="javascript:" class="underlined text-green-500">confirm</a>.
           <br/>
           <button id="permissions-button" class="opacity-100 mt-4 rounded-md bg-green-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" data-action="click->splash#acceptPermissions">Confirm</button>
