@@ -5,7 +5,13 @@ class HomeController < ApplicationController
   def skip
     redirect_to '/auth/redirect/' unless session[:userinfo].present?
 
-    NextVideoJob.perform_later
+    if params[:act_id].present?
+      act = Act.find(params[:act_id])
+      SkipActJob.perform_later(act)
+    else
+      NextVideoJob.perform_later
+    end
+    
     head :no_content
   end
 
