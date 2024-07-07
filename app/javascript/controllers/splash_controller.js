@@ -22,10 +22,11 @@ export default class extends Controller {
 
     let permissionVideo = this.permissionsTarget.querySelector("video");
     var permissionVideoPromise = permissionVideo.play();
+    var that = this;
     if (permissionVideoPromise !== undefined) {
       permissionVideoPromise.then(_ => {
         // Autoplay started!
-        this.acceptPermissions();
+        that.acceptPermissions();
       }).catch(error => {
         // Autoplay not allowed!
         permissionVideo.classList.add("hidden")
