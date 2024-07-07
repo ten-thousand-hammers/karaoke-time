@@ -8,10 +8,12 @@ class HomeController < ApplicationController
     if params[:act_id].present?
       act = Act.find(params[:act_id])
       SkipActJob.perform_later(act)
+    elsif params[:up_next].present?
+      SkipUpNextJob.perform_later
     else
       NextVideoJob.perform_later
     end
-    
+
     head :no_content
   end
 
