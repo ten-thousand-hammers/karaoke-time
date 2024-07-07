@@ -21,7 +21,7 @@ class HomeController < ApplicationController
       module_px_size: 6,
       resize_exactly_to: false,
       resize_gte_to: false,
-      size: 120
+      size: 160
     )
     send_data png.to_s, type: 'image/png', disposition: 'inline'
   end
