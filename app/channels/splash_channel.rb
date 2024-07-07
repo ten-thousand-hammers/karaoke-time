@@ -13,6 +13,13 @@ class SplashChannel < ApplicationCable::Channel
   end
 
   def ended(_data)
-    NextVideoJob.set(wait: 5.seconds).perform_later
+    # Clear the now_playing fields
+    Performance.instance.update!(
+      now_playing_song: nil,
+      now_playing_user: nil
+    )
+
+    # Wait 15 seconds before starting the next song
+    NextVideoJob.set(wait: 15.seconds).perform_later
   end
 end
