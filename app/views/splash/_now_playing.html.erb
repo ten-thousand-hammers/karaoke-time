@@ -1,13 +1,15 @@
-<%= turbo_frame_tag "now_playing", class: "#{performance.now_playing_song.present? ? '' : 'hidden'} absolute w-full z-10", data: { splash_target: "top" } do %>
-  <div id="now-playing" class="p-4 text-right text-xl lg:text-4xl">
-    <p id="now-playing-song" 
-        data-splash-target="title" 
-        class="text-white" 
-        style="margin-bottom: 5px"><%= performance.now_playing_song&.name %></p>
-    <div class="text-green-500">
-      <i class="fa-solid fa-microphone" title="Current singer"></i>&nbsp;
-      <span id="now-playing-singer" 
-            data-splash-target="singer"><%= performance.now_playing_user&.nickname %></span>
+<%= turbo_frame_tag "now_playing", class: "#{performance.now_playing_song.present? ? '' : 'hidden'} absolute right-0 z-10", data: { splash_target: "top" } do %>
+<div id="now-playing" class="p-4 text-right text-xl 2xl:text-4xl">
+    <div class="bg-black p-4 rounded-xl bg-opacity-60 text-opacity-100">
+      <p id="now-playing-song" 
+          data-splash-target="title" 
+          class="text-white" 
+          style="margin-bottom: 5px"><%= performance.now_playing_song&.name %></p>
+      <div class="text-green-500">
+        <i class="fa-solid fa-microphone" title="Current singer"></i>&nbsp;
+        <span id="now-playing-singer" 
+              data-splash-target="singer"><%= performance.now_playing_user&.nickname %></span>
+      </div>
     </div>
   </div>
 <% end %>
