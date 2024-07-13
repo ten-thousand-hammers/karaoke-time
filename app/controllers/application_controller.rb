@@ -7,14 +7,14 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return nil if session[:userinfo].nil?
-    return nil if session[:userinfo]["email"].nil?
+    return nil if session[:userinfo]["sub"].nil?
 
-    User.find_by(email: session[:userinfo]["email"])
+    User.find_by(auth0_id: session[:userinfo]["sub"])
   end
 
   def server_url
     return ENV["SERVER_URL"] if ENV["SERVER_URL"].present?
-    
+
     uri = URI.parse(request.original_url)
     uri.path = ""
     uri.query = nil

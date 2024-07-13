@@ -5,15 +5,27 @@ class Auth0Controller < ApplicationController
     # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].
     # Refer to https://github.com/auth0/omniauth-auth0#authentication-hash for complete information on 'omniauth.auth' contents.
     session[:userinfo] = request.env['omniauth.auth']['extra']['raw_info']
-    Rails.logger.info "User info: #{session[:userinfo].to_json}"
-    user = User.find_or_initialize_by(email: session[:userinfo]["email"])
+    user = User.find_or_initialize_by(auth0_id: session[:userinfo]["sub"])
 
-    if user.new_record?
-      user.name = session[:userinfo]["name"]
-      user.picture = session[:userinfo]["picture"]
-      user.nickname = user.name
-      user.save!
+    new_user = user.new_record?
+    if new_user
+      user.name = session[:userinfo]["name"].presence
+      user.nickname = user.name || "#{Faker::Creature::Bird.silly_adjective.titleize} #{Faker::Creature::Bird.common_name}"
+    end
 
+    if user.auth0_id.nil?
+      user.auth0_id = session[:userinfo]["sub"]
+    end
+
+    if session[:userinfo]["picture"].present?
+      if user.picture.nil? || user.picture != session[:userinfo]["picture"]
+        user.picture = session[:userinfo]["picture"]
+      end
+    end
+
+    user.save!
+
+    if new_user
       redirect_to edit_profile_url(user)
     else
       redirect_to search_url

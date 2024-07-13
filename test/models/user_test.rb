@@ -9,6 +9,7 @@
 #  picture    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  auth0_id   :string
 #
 require "test_helper"
 
