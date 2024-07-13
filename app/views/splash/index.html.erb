@@ -11,19 +11,12 @@
       <img class="w-1/4" src="/logo3.png" alt="logo" />
     </div>
   </div>
-  
+
   <%= render "video", performance: @performance %>
 
-  <div id="bottom-container" class="absolute fixed bottom-0 w-full">
+  <div id="bottom-container" class="fixed bottom-0 w-full">
     <div class="flex justify-between items-end m-4">
-      <div id="qr-code">
-        <img src="/qrcode" width="w-1/8" style="image-rendering: pixelated" alt="qrcode" />
-        <div class="mt-2 bg-black p-2 rounded-xl bg-opacity-60 text-opacity-100">
-          <div class="text-xl 2xl:text-4xl stroke text-white">
-            <div>&nbsp;<%= server_url %></div>
-          </div>
-        </div>
-      </div>
+      <%= render "qr_code" %>
       <%= render "up_next", performance: @performance %>
     </div>
   </div>
