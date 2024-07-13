@@ -5,24 +5,28 @@ export default class extends Controller {
   static targets = ["permissions"];
 
   initialize() {
-    let permissionVideo = this.element.querySelector("video");
-    var permissionVideoPromise = permissionVideo.play();
-    if (permissionVideoPromise !== undefined) {
-      permissionVideoPromise
-        .then((_) => {
-          // Autoplay started!
-          console.log("autoplay started");
-          this.acceptPermissions();
-        })
-        .catch((error) => {
-          // Autoplay not allowed!
-          console.log("autoplay not allowed");
-          permissionVideo.classList.add("hidden");
-        });
-    }
+    this.acceptPermissions();
   }
 
   acceptPermissions() {
+    let permissionVideo = this.element.querySelector("video");
+    var permissionVideoPromise = permissionVideo.play();
+    if (permissionVideoPromise === undefined) {
+      return;
+    }
+
+    permissionVideoPromise
+      .then((_) => {
+        // Autoplay started!
+        this.acceptedPermissions();
+      })
+      .catch((error) => {
+        // Autoplay not allowed!
+        permissionVideo.classList.add("hidden");
+      });
+  }
+
+  acceptedPermissions() {
     this.element.classList.add("hidden");
     this.dispatch("accepted");
   }
