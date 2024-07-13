@@ -1,3 +1,5 @@
+require "open3"
+
 class DownloadVideoJob < ApplicationJob
   queue_as :default
 
