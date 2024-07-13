@@ -1,12 +1,25 @@
 <%= turbo_frame_tag "video", class: "absolute h-screen v-screen" do %>
-  <video 
-   data-splash-target="video" 
-   autoplay 
-   class="<%= performance.now_playing_song.present? ? '' : 'hidden' %> h-screen w-screen"
-   data-action="ended->splash#ended">
-    <source 
-     type="video/mp4" 
-     src="/<%= performance.now_playing_song&.path %>"
-     />
-  </video>
+  <% if performance.now_playing_song.present? %>
+    <% if performance.now_playing_song.downloaded %>
+      <video
+        data-splash-target="video"
+        autoplay
+        class="h-screen w-screen"
+        data-action="ended->splash#ended">
+          <source
+          type="video/mp4"
+          src="/<%= performance.now_playing_song&.path %>"
+          />
+        </video>
+    <% else %>
+      <div data-controller="youtube"
+           data-youtube-target="youtube"
+           data-splash-target="youtube"
+           data-action="ended->splash#ended"
+           data-youtube-video-id-value="<%= performance.now_playing_song.external_id %>"
+           class="h-screen w-screen">
+        <div id="ytplayer" data-youtube-target="player" class="h-screen w-screen"></div>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
