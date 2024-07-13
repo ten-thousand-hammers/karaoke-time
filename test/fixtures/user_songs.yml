@@ -19,13 +19,3 @@
 #  song_id  (song_id => songs.id)
 #  user_id  (user_id => users.id)
 #
-
-one:
-  user: one
-  song: one
-  plays: 1
-
-two:
-  user: two
-  song: two
-  plays: 1

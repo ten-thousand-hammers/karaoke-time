@@ -21,11 +21,3 @@
 #  song_id         (song_id => songs.id)
 #  user_id         (user_id => users.id)
 #
-
-one:
-  song: one
-  user: MyText
-
-two:
-  song: two
-  user: MyText

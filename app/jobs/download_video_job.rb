@@ -8,7 +8,7 @@ class DownloadVideoJob < ApplicationJob
     if File.exist?(File.join("public", "videos", "#{song.external_id}.#{extension}"))
       song.update!(
         downloaded: true,
-        File.join("videos", "#{song.external_id}.#{file_quality}")
+        path: File.join("videos", "#{song.external_id}.#{extension}")
       )
       return
     end

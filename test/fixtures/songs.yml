@@ -17,16 +17,5 @@
 #  external_id     :string
 #
 
-one:
-  external_id: MyString
-  name: MyString
-  url: MyString
-  duration: 1.5
-  thumbnails: 
-
-two:
-  external_id: MyString
-  name: MyString
-  url: MyString
-  duration: 1.5
-  thumbnails: 
+jason_mraz_im_yours:
+  external_id: kn8YiDSYcq4

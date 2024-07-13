@@ -10,13 +10,3 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-one:
-  email: MyString
-  name: MyString
-  picture: MyString
-
-two:
-  email: MyString
-  name: MyString
-  picture: MyString
