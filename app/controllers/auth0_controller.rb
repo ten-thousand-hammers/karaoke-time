@@ -5,6 +5,7 @@ class Auth0Controller < ApplicationController
     # If the id_token is needed, you can get it from session[:userinfo]['credentials']['id_token'].
     # Refer to https://github.com/auth0/omniauth-auth0#authentication-hash for complete information on 'omniauth.auth' contents.
     session[:userinfo] = request.env['omniauth.auth']['extra']['raw_info']
+    Rails.logger.info "User info: #{session[:userinfo].to_json}"
     user = User.find_or_initialize_by(email: session[:userinfo]["email"])
 
     if user.new_record?
