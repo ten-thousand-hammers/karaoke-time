@@ -13,7 +13,7 @@ class SearchController < ApplicationController
         .map { |line| JSON.parse(line) }
         .select { |obj| obj["title"].present? && obj["url"].present? }
 
-      @results = @results.map do |item|
+      @songs = @results.map do |item|
         song = Song.find_or_create_by(external_id: item["id"]) do |s|
           s.name = item["title"]
           s.url = item["url"]
@@ -31,12 +31,12 @@ class SearchController < ApplicationController
 
   def play
     permitted_params = params.permit(:id)
-    song = Song.find_by(external_id: permitted_params[:id]) 
+    song = Song.find_by(external_id: permitted_params[:id])
 
     QueueVideoJob.perform_later(song, current_user)
 
     respond_to do |format|
-      format.html { 
+      format.html {
         head :no_content
       }
 

@@ -2,13 +2,7 @@ class QueueVideoJob < ApplicationJob
   queue_as :default
 
   def perform(song, user)
-    ext = "mp4"
-
-    destination_path = File.join("public", "videos", "#{song.external_id}.#{ext}")
-    unless File.exist?(destination_path)
-      DownloadVideoJob.perform_now("https://www.youtube.com/watch?v=#{song.external_id}")
-      song.update!(path: File.join("videos", "#{song.external_id}.#{ext}"))
-    end
+    DownloadVideoJob.perform_now(song) unless song.downloaded
 
     if Performance.instance.up_next_song.present?
       Act.create!(performance: Performance.instance, song: song, user: user)
@@ -18,9 +12,9 @@ class QueueVideoJob < ApplicationJob
         up_next_user: user
       )
     end
-    
+
     return if Performance.instance.now_playing_song.present?
-    
+
     NextVideoJob.perform_later
   end
 end

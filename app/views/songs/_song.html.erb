@@ -1,0 +1,21 @@
+<div class="relative rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2 hover:border-gray-400">
+  <div class="">
+    <img class="w-full rounded-t-lg" src="<%= song.thumbnails.first['url'] %>" alt="">
+  </div>
+  <div class="bg-white rounded-b-lg">
+    <p class="text-sm font-medium text-gray-900 p-3">
+      <%= song.name %>
+    </p>
+    <p class="">
+      <% if song.downloaded %>
+        <%= link_to "Add to Queue",
+            play_url(id: song.external_id),
+            class: "block rounded-b-lg bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600", data: { turbo_method: :post } %>
+      <% else %>
+        <%= link_to "Download to Queue",
+            play_url(id: song.external_id),
+            class: "block rounded-b-lg bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600", data: { turbo_method: :post } %>
+      <% end %>
+    </p>
+  </div>
+</div>

@@ -78,3 +78,5 @@ gem "rqrcode", "~> 2.0"
 gem 'omniauth-auth0', '~> 3.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
 gem "kaminari", "~> 1.2"
+
+gem "annotate"

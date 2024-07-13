@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_134835) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_13_123040) do
   create_table "acts", force: :cascade do |t|
     t.integer "song_id", null: false
     t.datetime "created_at", null: false
@@ -46,6 +46,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_134835) do
     t.datetime "updated_at", null: false
     t.string "path"
     t.integer "plays", default: 0, null: false
+    t.boolean "downloaded", default: false
+    t.text "download_error"
+    t.integer "download_status"
   end
 
   create_table "user_songs", force: :cascade do |t|
