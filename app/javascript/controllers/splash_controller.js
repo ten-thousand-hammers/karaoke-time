@@ -9,7 +9,6 @@ export default class extends Controller {
     "singer",
     "video",
     "youtube",
-    "permissions",
     "upNext",
     "upNextTitle",
     "upNextSinger",
@@ -19,10 +18,8 @@ export default class extends Controller {
   };
 
   initialize() {
-    // console.log("initialize")
-
     if (!document.cookie.includes("_karaoke_time_id")) {
-      const randomId = Math.random().toString(36).substr(2, 9);
+      const randomId = Math.random().toString(36).substring(2, 9);
       document.cookie = `_karaoke_time_id=${randomId}`;
     }
 
@@ -30,21 +27,6 @@ export default class extends Controller {
       this.videoTarget.addEventListener("ended", function () {
         this.stateValue = "idle";
       });
-    }
-
-    let permissionVideo = this.permissionsTarget.querySelector("video");
-    var permissionVideoPromise = permissionVideo.play();
-    var that = this;
-    if (permissionVideoPromise !== undefined) {
-      permissionVideoPromise
-        .then((_) => {
-          // Autoplay started!
-          that.acceptPermissions();
-        })
-        .catch((error) => {
-          // Autoplay not allowed!
-          permissionVideo.classList.add("hidden");
-        });
     }
 
     let splashController = this;
@@ -64,7 +46,11 @@ export default class extends Controller {
 
         received(data) {
           if (data["event"] == "play") {
-            splashController.play(data["url"], data["title"], data["singer"]);
+            splashController.playUrl(
+              data["url"],
+              data["title"],
+              data["singer"],
+            );
           } else if (data["event"] == "queue") {
             splashController.queue(data["title"], data["singer"]);
           }
@@ -112,7 +98,16 @@ export default class extends Controller {
     this.upNextTarget.classList.remove("hidden");
   }
 
-  play(url, title, singer) {
+  play() {
+    if (!this.videoTarget.querySelector("source").src) {
+      return;
+    }
+
+    this.videoTarget.play();
+    this.stateValue = "playing";
+  }
+
+  playUrl(url, title, singer) {
     console.log(`play: ${url}`);
 
     this.topTarget.classList.add("absolute");
@@ -128,19 +123,12 @@ export default class extends Controller {
     this.videoTarget.classList.remove("hidden");
     this.videoTarget.play();
 
-    this.stateValue = "playing";
+    this.play();
   }
 
   ended() {
     // console.log("ended");
     this.splashChannel.ended();
-  }
-
-  acceptPermissions() {
-    this.permissionsTarget.classList.add("hidden");
-    if (this.videoTarget.querySelector("source").src) {
-      this.videoTarget.play();
-    }
   }
 
   // connect() {

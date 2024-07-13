@@ -5,7 +5,8 @@
         data-splash-target="video"
         autoplay
         class="h-screen w-screen"
-        data-action="ended->splash#ended">
+        data-action="ended->splash#ended"
+        data-action="permissions:accepted->splash#play">
           <source
           type="video/mp4"
           src="/<%= performance.now_playing_song&.path %>"
