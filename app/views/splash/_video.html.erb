@@ -12,11 +12,9 @@
           />
         </video>
     <% else %>
-      <div data-controller="youtube"
-           data-youtube-target="youtube"
-           data-splash-target="youtube"
-           data-action="ended->splash#ended"
+      <div data-controller="youtube" data-youtube-target="youtube"
            data-youtube-video-id-value="<%= performance.now_playing_song.external_id %>"
+           data-splash-target="youtube" data-action="ended->splash#ended"
            class="h-screen w-screen">
         <div id="ytplayer" data-youtube-target="player" class="h-screen w-screen"></div>
       </div>
