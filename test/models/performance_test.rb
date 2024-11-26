@@ -2,14 +2,15 @@
 #
 # Table name: performances
 #
-#  id                  :integer          not null, primary key
-#  now_playing_url     :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  now_playing_song_id :integer
-#  now_playing_user_id :integer
-#  up_next_song_id     :integer
-#  up_next_user_id     :integer
+#  id                      :integer          not null, primary key
+#  now_playing_url         :string
+#  up_next_download_status :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  now_playing_song_id     :integer
+#  now_playing_user_id     :integer
+#  up_next_song_id         :integer
+#  up_next_user_id         :integer
 #
 # Indexes
 #

@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_26_030255) do
     t.integer "now_playing_song_id"
     t.integer "up_next_user_id"
     t.integer "now_playing_user_id"
+    t.string "up_next_download_status"
     t.index ["now_playing_song_id"], name: "index_performances_on_now_playing_song_id"
     t.index ["now_playing_user_id"], name: "index_performances_on_now_playing_user_id"
     t.index ["up_next_song_id"], name: "index_performances_on_up_next_song_id"

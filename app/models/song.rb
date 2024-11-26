@@ -22,6 +22,8 @@ class Song < ApplicationRecord
   has_many :user_songs
   has_many :users, through: :user_songs
 
+  enum download_status: { pending: 0, downloading: 1, completed: 2, failed: 3 }
+
   scope :playable, -> { where(file_problem: [false, nil], not_embeddable: [false, nil]) }
 
   def mark_file_problem!
