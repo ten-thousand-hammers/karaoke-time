@@ -32,4 +32,31 @@ class SongsController < ApplicationController
       format.turbo_stream
     end
   end
+
+  def destroy
+    @song = Song.find(params[:id])
+    
+    # Delete the file from disk if it exists
+    if @song.downloaded? && @song.path.present?
+      file_path = Rails.root.join("public", @song.path)
+      File.delete(file_path) if File.exist?(file_path)
+    end
+
+    # Remove from database
+    if Performance.instance.up_next_song == @song
+      SkipUpNextJob.perform_now
+    end
+
+    if Performance.instance.now_playing_song == @song
+      NextVideoJob.perform_later
+    end
+
+    @song.user_songs.destroy_all
+    @song.destroy
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path, notice: "Song was successfully deleted.") }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(@song) }
+    end
+  end
 end
