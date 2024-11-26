@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "logo", class: "absolute w-full" do %>
+  <div class="flex justify-center items-center h-screen">
+    <% if performance.now_playing_song.nil? && 
+          performance.up_next_song.present? %>
+      <div class="text-center text-white">
+        <h2 class="text-4xl font-bold mb-4">Up Next</h2>
+        <p class="text-6xl"><%= performance.up_next_song.name %></p>
+        <% if performance.up_next_user %>
+          <p class="text-2xl mt-4 text-green-500">
+            <i class="fa-solid fa-microphone"></i>
+            <%= performance.up_next_user.nickname %>
+          </p>
+        <% end %>
+      </div>
+    <% else %>
+      <img class="w-1/4" src="/logo3.png" alt="logo" />
+    <% end %>
+  </div>
+<% end %>

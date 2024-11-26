@@ -5,12 +5,8 @@
      data-action="mousemove->hide-mouse#mousemove"
      class="bg-blue-950 h-screen w-screen">
   <%= render "now_playing", performance: @performance %>
-
-  <div id="logo-container" class="absolute w-full">
-    <div class="flex justify-center items-center h-screen">
-      <img class="w-1/4" src="/logo3.png" alt="logo" />
-    </div>
-  </div>
+  
+  <%= render "logo", performance: @performance %>
 
   <%= render "video", performance: @performance %>
 

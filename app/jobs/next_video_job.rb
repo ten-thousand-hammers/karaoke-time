@@ -8,8 +8,15 @@ class NextVideoJob < ApplicationJob
     up_next_user = Performance.instance.up_next_user
 
     Performance.instance.update!(
-      now_playing_song: Performance.instance.up_next_song,
-      now_playing_user: Performance.instance.up_next_user,
+      now_playing_song: nil,
+      now_playing_user: nil,
+    )
+
+    sleep 10
+
+    Performance.instance.update!(
+      now_playing_song: up_next_song,
+      now_playing_user: up_next_user,
       up_next_song: next_act&.song,
       up_next_user: next_act&.user
     )

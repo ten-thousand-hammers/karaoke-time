@@ -54,7 +54,12 @@ class Performance < ApplicationRecord
         target: "video"  
     end
 
-    if up_next_song_id_previously_changed?
+    if now_playing_song_id_previously_changed? || up_next_song_id_previously_changed?
+      broadcast_replace_to "splash", 
+        partial: "splash/logo", 
+        locals: { performance: self }, 
+        target: "logo"
+
       broadcast_replace_to "splash", 
           partial: "splash/up_next", 
           locals: { performance: self }, 
