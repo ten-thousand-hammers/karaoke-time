@@ -5,7 +5,13 @@ class SearchController < ApplicationController
     search_term = params[:search]
 
     if search_term.present?
-      cmd = ["yt-dlp", "-j", "--no-playlist", "--flat-playlist", %(ytsearch10:"#{search_term} karaoke")].join(" ")
+      cmd = [
+        YtDlpManager::BINARY_PATH,
+        "-j", 
+        "--no-playlist", 
+        "--flat-playlist", 
+        %(ytsearch10:"#{search_term} karaoke")
+      ].join(" ")
       response = `#{cmd}`
 
       @results = response

@@ -19,7 +19,7 @@ class DownloadVideoJob < ApplicationJob
     download_path = File.join("public", "videos", "%(id)s.%(ext)s")
     file_quality = extension # "bestvideo[ext!=webm][height<=1080]+bestaudio[ext!=webm]/best[ext!=webm]"
     cmd = [
-      "yt-dlp",
+      YtDlpManager::BINARY_PATH,
       "-f", file_quality,
       "-o", "\"#{download_path}\"", video_url
     ].join(" ")

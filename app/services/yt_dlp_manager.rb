@@ -20,7 +20,7 @@ class YtDlpManager
 
   def self.update_binary
     if File.exist?(BINARY_PATH)
-      output = `#{BINARY_PATH} -U 2>&1`
+      output = `#{BINARY_PATH} --update-to nightly 2>&1`
       success = $?.success?
       {success: success, message: output}
     else
