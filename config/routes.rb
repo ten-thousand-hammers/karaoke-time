@@ -31,6 +31,9 @@ Rails.application.routes.draw do
     end
   end
   
+  get 'settings' => 'settings#index'
+  patch 'settings' => 'settings#update'
+  post 'settings/update_yt_dlp' => 'settings#update_yt_dlp'
   resource :settings, only: [:index, :update] do
     get :index, on: :collection
   end

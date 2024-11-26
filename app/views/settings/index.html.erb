@@ -20,7 +20,61 @@
             class: "rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" %>
       </div>
     <% end %>
+
+    <div class="mt-12">
+      <h2 class="text-xl font-semibold mb-4">YouTube-DL Management</h2>
+      <div class="space-y-4">
+        <div>
+          <p class="text-gray-300">Current Version: <span id="yt-dlp-version" class="font-mono"><%= @yt_dlp_version || 'Not installed' %></span></p>
+        </div>
+        <div>
+          <button id="update-yt-dlp" 
+                  class="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+            Update yt-dlp
+          </button>
+          <p id="update-status" class="mt-2 text-sm text-gray-300"></p>
+        </div>
+      </div>
+    </div>
   </main>
 
   <%= render "navigation" %>
 </div>
+
+<%= javascript_tag do %>
+  document.addEventListener('DOMContentLoaded', function() {
+    const updateButton = document.getElementById('update-yt-dlp');
+    const statusElement = document.getElementById('update-status');
+    const versionElement = document.getElementById('yt-dlp-version');
+
+    updateButton.addEventListener('click', async function() {
+      updateButton.disabled = true;
+      statusElement.textContent = 'Updating...';
+      
+      try {
+        const response = await fetch('/settings/update_yt_dlp', {
+          method: 'POST',
+          headers: {
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+          }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          statusElement.textContent = data.message;
+          if (data.version) {
+            versionElement.textContent = data.version;
+          }
+        } else {
+          statusElement.textContent = 'Update failed: ' + data.message;
+        }
+      } catch (error) {
+        statusElement.textContent = 'Error updating yt-dlp';
+        console.error('Error:', error);
+      } finally {
+        updateButton.disabled = false;
+      }
+    });
+  });
+<% end %>

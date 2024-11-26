@@ -16,6 +16,7 @@
                                          PUT    /profile/:id(.:format)                                                                            profile#update
                             browse_index GET    /browse(.:format)                                                                                 browse#index
                   mark_file_problem_song POST   /songs/:id/mark_file_problem(.:format)                                                            songs#mark_file_problem
+                mark_not_embeddable_song POST   /songs/:id/mark_not_embeddable(.:format)                                                          songs#mark_not_embeddable
                                    songs GET    /songs(.:format)                                                                                  songs#index
                                          POST   /songs(.:format)                                                                                  songs#create
                                 new_song GET    /songs/new(.:format)                                                                              songs#new
@@ -24,6 +25,12 @@
                                          PATCH  /songs/:id(.:format)                                                                              songs#update
                                          PUT    /songs/:id(.:format)                                                                              songs#update
                                          DELETE /songs/:id(.:format)                                                                              songs#destroy
+                                settings GET    /settings(.:format)                                                                               settings#index
+                                         PATCH  /settings(.:format)                                                                               settings#update
+                  settings_update_yt_dlp POST   /settings/update_yt_dlp(.:format)                                                                 settings#update_yt_dlp
+                                         GET    /settings(.:format)                                                                               settings#index
+                                         PATCH  /settings(.:format)                                                                               settings#update
+                                         PUT    /settings(.:format)                                                                               settings#update
         turbo_recede_historical_location GET    /recede_historical_location(.:format)                                                             turbo/native/navigation#recede
         turbo_resume_historical_location GET    /resume_historical_location(.:format)                                                             turbo/native/navigation#resume
        turbo_refresh_historical_location GET    /refresh_historical_location(.:format)                                                            turbo/native/navigation#refresh
