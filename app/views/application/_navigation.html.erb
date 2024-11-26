@@ -18,6 +18,12 @@
       <% end %>
     </div>
 
+    <div>
+      <%= link_to settings_url do %>
+        <i class="text-3xl w-16 fa-solid fa-gear"></i>
+      <% end %>
+    </div>
+
     <% if user_signed_in? %>
       <div>
         <%= link_to edit_profile_url(current_user) do %>

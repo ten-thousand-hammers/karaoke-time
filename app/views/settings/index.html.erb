@@ -1,0 +1,26 @@
+<% content_for(:body_attributes) do %> class="bg-blue-950 text-white" } <% end %>
+
+<div>
+  <div id="flash" class="fixed top-0 z-20 w-full">
+    <%= render "alerts" %>
+  </div>
+
+  <%= render "top_menu" %>
+
+  <main class="container mx-auto px-4 mt-20 mb-24">
+    <h1 class="text-2xl font-semibold mb-6">Settings</h1>
+
+    <%= form_tag settings_path, method: :patch, class: "space-y-6" do %>
+      <label for="always_embed" class="font-medium text-white">
+        <%= check_box_tag :always_embed, "1", Setting.always_embed, class: "h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600" %> Always Use YouTube Embed
+      </label>
+      
+      <div>
+        <%= submit_tag "Save Changes", 
+            class: "rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" %>
+      </div>
+    <% end %>
+  </main>
+
+  <%= render "navigation" %>
+</div>

@@ -82,3 +82,5 @@ gem "kaminari", "~> 1.2"
 gem "annotate"
 
 gem "faker"
+
+gem 'rails-settings-cached'

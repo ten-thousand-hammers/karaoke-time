@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "video", class: "absolute h-screen v-screen" do %>
   <% if performance.now_playing_song.present? %>
-    <% if performance.now_playing_song.downloaded && !performance.now_playing_song.file_problem %>
+    <% if performance.now_playing_song.downloaded && !performance.now_playing_song.file_problem && !Setting.always_embed %>
       <video
         data-splash-target="video"
         autoplay

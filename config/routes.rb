@@ -30,4 +30,8 @@ Rails.application.routes.draw do
       post :mark_not_embeddable
     end
   end
+  
+  resource :settings, only: [:index, :update] do
+    get :index, on: :collection
+  end
 end
