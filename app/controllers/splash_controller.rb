@@ -1,6 +1,6 @@
 class SplashController < ApplicationController
   def index
-    @performance = Performance.instance
+    @performance = current_performance
 
     # @performance.now_playing_song = Song.find_by(external_id: params[:now_playing_song]) if params[:now_playing_song].present? 
     # @performance.now_playing_user = params[:now_playing_singer] if params[:now_playing_singer].present? 

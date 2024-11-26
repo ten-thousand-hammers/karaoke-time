@@ -1,8 +1,13 @@
 <%= turbo_frame_tag "now_playing" do %>
   <h3 class="text-xl text-amber-500">
     <% if performance.now_playing_song.present? %>
-      <%= performance.now_playing_song.name %>
+      <%= performance.now_playing_song.name %><br/>
       <%= link_to "Skip", skip_path, data: { turbo_method: :post, turbo_confirm: "Are you sure?" }, class: "text-xs text-teal-400" %>
+      <% if performance.now_playing_song.downloaded && !performance.now_playing_song.file_problem %>
+        - <%= link_to "Not playing?", mark_file_problem_song_path(performance.now_playing_song), data: { turbo_method: :post, turbo_confirm: "Are you sure?" }, class: "text-xs text-teal-400" %>
+      <% elsif !performance.now_playing_song.not_embeddable %>
+        - <%= link_to "Not streaming?", mark_not_embeddable_song_path(performance.now_playing_song), data: { turbo_method: :post, turbo_confirm: "Are you sure?" }, class: "text-xs text-teal-400" %>
+      <% end %>
     <% else %>
       Nothing is playing right now.
     <% end %>

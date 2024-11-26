@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "video", class: "absolute h-screen v-screen" do %>
   <% if performance.now_playing_song.present? %>
-    <% if performance.now_playing_song.downloaded && false %>
+    <% if performance.now_playing_song.downloaded && !performance.now_playing_song.file_problem %>
       <video
         data-splash-target="video"
         autoplay
@@ -12,6 +12,13 @@
           src="/<%= performance.now_playing_song&.path %>"
           />
         </video>
+    <% elsif performance.now_playing_song.not_embeddable %>
+      <div class="flex items-center justify-center h-screen w-screen bg-blue-950">
+        <div class="text-white text-center">
+          <h2 class="text-2xl mb-4">Sorry!</h2>
+          <p>This song cannot be played due to embedding restrictions.</p>
+        </div>
+      </div>
     <% else %>
       <div data-controller="youtube" data-youtube-target="youtube"
            data-youtube-video-id-value="<%= performance.now_playing_song.external_id %>"

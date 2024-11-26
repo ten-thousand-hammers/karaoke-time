@@ -7,7 +7,9 @@
 #  download_status :integer
 #  downloaded      :boolean          default(FALSE)
 #  duration        :float
+#  file_problem    :boolean
 #  name            :string
+#  not_embeddable  :boolean
 #  path            :string
 #  plays           :integer          default(0), not null
 #  thumbnails      :json
@@ -19,4 +21,14 @@
 class Song < ApplicationRecord
   has_many :user_songs
   has_many :users, through: :user_songs
+
+  scope :playable, -> { where(file_problem: [false, nil], not_embeddable: [false, nil]) }
+
+  def mark_file_problem!
+    update!(file_problem: true)
+  end
+
+  def resolve_file_problem!
+    update!(file_problem: false)
+  end
 end

@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
     uri.query = nil
     uri.to_s
   end
+
+  def current_performance
+    Performance.instance
+  end
 end

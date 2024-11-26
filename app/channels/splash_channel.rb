@@ -14,7 +14,7 @@ class SplashChannel < ApplicationCable::Channel
 
   def ended(_data)
     # Clear the now_playing fields
-    Performance.instance.update!(
+    current_performance.update!(
       now_playing_song: nil,
       now_playing_user: nil
     )

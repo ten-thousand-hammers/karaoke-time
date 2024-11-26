@@ -7,7 +7,9 @@
 #  download_status :integer
 #  downloaded      :boolean          default(FALSE)
 #  duration        :float
+#  file_problem    :boolean
 #  name            :string
+#  not_embeddable  :boolean
 #  path            :string
 #  plays           :integer          default(0), not null
 #  thumbnails      :json

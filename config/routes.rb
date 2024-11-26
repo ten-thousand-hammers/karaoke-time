@@ -24,4 +24,10 @@ Rails.application.routes.draw do
 
   resources :profile, only: [:edit, :update]
   resources :browse, only: [:index]
+  resources :songs do
+    member do
+      post :mark_file_problem
+      post :mark_not_embeddable
+    end
+  end
 end
