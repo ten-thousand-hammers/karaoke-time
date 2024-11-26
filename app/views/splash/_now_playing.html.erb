@@ -7,8 +7,13 @@
         style="margin-bottom: 5px">
       <%= performance.now_playing_song&.name %>
     </p>
-    <div class="text-green-500">
-      <i class="fa-solid fa-microphone" title="Current singer"></i>&nbsp;
+    <div class="text-green-500 flex items-center justify-end gap-2">
+      <% if performance.now_playing_user&.avatar %>
+        <%= image_tag "/images/avatars/avatar_#{performance.now_playing_user.avatar}.png", 
+            class: "w-8 h-8 rounded-full border-2 border-green-500",
+            alt: "#{performance.now_playing_user.nickname}'s avatar" %>
+      <% end %>
+      <i class="fa-solid fa-microphone" title="Current singer"></i>
       <span id="now-playing-singer" 
             data-splash-target="singer"><%= performance.now_playing_user&.nickname %></span>
     </div>

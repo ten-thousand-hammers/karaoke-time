@@ -16,10 +16,38 @@
 
     <div class="space-y-8">
       <%= form_with(model: current_user, url: profile_path(current_user)) do |form| %>
-        <%= form.label :nickname, class: "text-white" %>
-        <%= form.text_field :nickname, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" %>
-        <div class="mt-2">
-          <%= form.submit "Update", class: "rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" %>
+        <div class="mb-6">
+          <%= form.label :nickname, class: "text-white block mb-2" %>
+          <%= form.text_field :nickname, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6" %>
+        </div>
+
+        <div class="mb-6" data-controller="avatar-selector">
+          <%= form.label :avatar, "Choose Your Avatar", class: "text-white block mb-4" %>
+          <div class="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6">
+            <% User.available_avatars.each do |avatar_num| %>
+              <div class="relative">
+                <%= form.radio_button :avatar, avatar_num, 
+                    class: "hidden peer", 
+                    id: "avatar_#{avatar_num}",
+                    data: { 
+                      avatar_selector_target: "radio",
+                      action: "change->avatar-selector#select"
+                    } %>
+                <label for="avatar_<%= avatar_num %>" class="block cursor-pointer">
+                  <div class="relative">
+                    <%= image_tag "/images/avatars/avatar_#{avatar_num}.png", 
+                        id: "avatar_img_#{avatar_num}",
+                        class: "w-full rounded-lg transition-all duration-200",
+                        data: { avatar_selector_target: "image" } %>
+                  </div>
+                </label>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <%= form.submit "Update Profile", class: "rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" %>
         </div>
       <% end %>
     </div>

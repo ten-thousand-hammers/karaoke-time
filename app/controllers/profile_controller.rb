@@ -5,7 +5,7 @@ class ProfileController < ApplicationController
   end
 
   def update
-    permitted_params = params.require(:user).permit(:nickname)
+    permitted_params = params.require(:user).permit(:nickname, :avatar)
     if current_user.update(permitted_params)
       redirect_to root_url
     else

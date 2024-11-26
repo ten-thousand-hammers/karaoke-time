@@ -1,8 +1,13 @@
 <%= turbo_frame_tag "logo", class: "absolute w-full" do %>
-  <div class="flex justify-center items-center h-screen">
+  <div class="flex justify-center items-start h-screen pt-32">
     <% if performance.now_playing_song.nil? && 
           performance.up_next_song.present? %>
-      <div class="text-center text-white">
+      <div class="text-center text-white -mt-20">
+        <% if performance.up_next_user&.avatar %>
+          <%= image_tag "/images/avatars/avatar_#{performance.up_next_user.avatar}.png", 
+              class: "w-48 h-48 md:w-64 md:h-64 mx-auto mb-8 rounded-full border-4 border-green-500 shadow-lg",
+              alt: "#{performance.up_next_user.nickname}'s avatar" %>
+        <% end %>
         <h2 class="text-4xl font-bold mb-4">Up Next</h2>
         <p class="text-6xl"><%= performance.up_next_song.name %></p>
         <% if performance.up_next_user %>
