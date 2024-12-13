@@ -1,18 +1,14 @@
 <%= turbo_frame_tag "video", class: "absolute h-screen v-screen" do %>
   <% if performance.now_playing_song.present? %>
-    <% if performance.now_playing_song.downloaded && 
-          !performance.now_playing_song.file_problem && 
+    <% if performance.now_playing_song.downloaded &&
+          !performance.now_playing_song.file_problem &&
           !Setting.always_embed %>
       <video
         data-splash-target="video"
         autoplay
         class="h-screen w-screen"
-        data-action="ended->splash#ended"
-        data-action="permissions:accepted->splash#play">
-          <source
-          type="video/mp4"
-          src="/<%= performance.now_playing_song&.path %>"
-          />
+        data-action="ended->splash#ended permissions:accepted->splash#play">
+          <source type="video/mp4" src="/<%= performance.now_playing_song&.path %>" />
         </video>
     <% elsif performance.now_playing_song.not_embeddable %>
       <div class="flex items-center justify-center h-screen w-screen bg-blue-950">
@@ -22,12 +18,15 @@
         </div>
       </div>
     <% else %>
-      <div data-controller="youtube" data-youtube-target="youtube"
+      <div data-controller="youtube"
+           data-youtube-target="youtube"
            data-youtube-video-id-value="<%= performance.now_playing_song.external_id %>"
-           data-splash-target="youtube" data-action="ended->splash#ended"
+           data-splash-target="video"
+           data-action="ended->splash#ended"
            class="h-screen w-screen">
         <div id="ytplayer" data-youtube-target="player" class="h-screen w-screen"></div>
       </div>
     <% end %>
   <% end %>
+
 <% end %>
