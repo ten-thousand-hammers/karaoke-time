@@ -193,3 +193,17 @@ Replace the **192.168.1.2** with your own IP address below. I'd suggest making s
 ```
 
 Save that file and you should be good to go. Try to restart the computer and see if it starts up and loads karaoke time.
+
+## First Run
+
+Once it's started up in the browser it's first going to test whether or not it can autoplay video. The computer is meant to be one that you don't have to touch. However, sometimes we can't force this autoplay. If it doesn't work, you have to click the **Confirm** button in order to get it to fully start up. If it works though, you'll hear some audio because it's autoplaying a small portion of Big Buck Bear.
+
+### Loading it on your phone
+
+It should be showing a barcode of a local IP address on the bottom left hand corner. Scan this with your phone and it should load up your web browser to the search interface.
+
+### Updating yt-dlp
+
+This program does require that you have a utility installed called `yt-dlp`. It's what we use to search and download youtube videos. However, YouTube doesn't like this and frequently breaks it. That means you have to have a very up to date version of yt-dlp to get around any of their latest changes.
+
+I've built into the app a way to automatically download and update yt-dlp. Click on the settings gear at the bottom and click on **Update yt-dlp** and wait. It should update fairly quick to the latest _nightly version_.
