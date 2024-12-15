@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :set_browser_id
 
   def set_browser_id
-    session[:browser_id] = cookies[:karaoke_time__browser_id] if cookies[:karaoke_time__browser_id].present?
+    session[:browser_id] = cookies[:_karaoke_time_browser_id] if cookies[:_karaoke_time_browser_id].present?
   end
 
   def user_signed_in?
@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
       User.find_by(browser_id: session[:browser_id])
     elsif session[:userinfo].present? && session[:userinfo]["sub"].present?
       User.find_by(auth0_id: session[:userinfo]["sub"])
-    elsif cookies[:karaoke_time__browser_id].present?
-      user = User.find_by(browser_id: cookies[:karaoke_time__browser_id])
+    elsif cookies[:_karaoke_time_browser_id].present?
+      user = User.find_by(browser_id: cookies[:_karaoke_time_browser_id])
       session[:browser_id] = user.browser_id if user.present?
       user
     else

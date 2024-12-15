@@ -15,8 +15,8 @@ module Secured
     if session[:userinfo].present? && session[:userinfo]["sub"].present?
       user = User.find_by(auth0_id: session[:userinfo]["sub"])
       if user.present?
-        if user.browser_id.blank? && cookies[:karaoke_time__browser_id].present?
-          user.browser_id = cookies[:karaoke_time__browser_id]
+        if user.browser_id.blank? && cookies[:_karaoke_time_browser_id].present?
+          user.browser_id = cookies[:_karaoke_time_browser_id]
           user.save!
         end
 
@@ -28,9 +28,9 @@ module Secured
   end
 
   def logged_in_using_browser_id?
-    return unless cookies[:karaoke_time__browser_id].present?
+    return unless cookies[:_karaoke_time_browser_id].present?
 
-    user = User.find_or_initialize_by(browser_id: cookies[:karaoke_time__browser_id])
+    user = User.find_or_initialize_by(browser_id: cookies[:_karaoke_time_browser_id])
     if user.new_record?
       user.save!
       redirect_to edit_profile_path(user), notice: "Looks like it's the first time you're using Karaoke Time. Please add a Nickname and Avatar."
