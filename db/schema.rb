@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_26_030255) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_15_192507) do
   create_table "acts", force: :cascade do |t|
     t.integer "song_id", null: false
     t.datetime "created_at", null: false
@@ -81,6 +81,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_26_030255) do
     t.datetime "updated_at", null: false
     t.string "auth0_id"
     t.integer "avatar"
+    t.string "browser_id"
   end
 
   add_foreign_key "acts", "performances"

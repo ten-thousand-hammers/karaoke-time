@@ -11,6 +11,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  auth0_id   :string
+#  browser_id :string
 #
 class User < ApplicationRecord
   has_many :user_songs
