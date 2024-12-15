@@ -179,7 +179,7 @@ Let's go through some quick steps to do this
 
 Setup the karaoke user to auto login. You may be able to do this during OS install. If not, we can add instructions here. I don't know how to do it off the otp of my head.
 
-### Start Chromium at Boot
+#### Start Chromium at Boot
 
 You can modify the wayfire.ini to auto boot chromium on your service.
 
