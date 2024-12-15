@@ -193,9 +193,3 @@ Replace the **192.168.1.2** with your own IP address below. I'd suggest making s
 ```
 
 Save that file and you should be good to go. Try to restart the computer and see if it starts up and loads karaoke time.
-
-## Test URLs
-
-[Now Playing](http://localhost:3000/splash?now_playing_title=Jason%20Mraz%20-%20I%27m%20Yours%20(Karaoke%20Version)&now_playing_singer=Nate)
-
-[Up Next](http://localhost:3000/splash?up_next_title=Jason%20Mraz%20-%20I%27m%20Yours%20(Karaoke%20Version)&up_next_singer=Nate)
