@@ -1,10 +1,9 @@
 <%= turbo_frame_tag "logo", class: "absolute w-full" do %>
-  <div class="flex justify-center items-start h-screen pt-32">
-    <% if performance.now_playing_song.nil? && 
-          performance.up_next_song.present? %>
+  <% if performance.now_playing_song.nil? && performance.up_next_song.present? %>
+    <div class="flex justify-center items-start h-screen pt-64">
       <div class="text-center text-white -mt-20">
         <% if performance.up_next_user&.avatar %>
-          <%= image_tag "/images/avatars/avatar_#{performance.up_next_user.avatar}.png", 
+          <%= image_tag "/images/avatars/avatar_#{performance.up_next_user.avatar}.png",
               class: "w-48 h-48 md:w-64 md:h-64 mx-auto mb-8 rounded-full border-4 border-green-500 shadow-lg",
               alt: "#{performance.up_next_user.nickname}'s avatar" %>
         <% end %>
@@ -30,8 +29,10 @@
           </p>
         <% end %>
       </div>
-    <% else %>
+    </div>
+  <% else %>
+    <div class="flex justify-center items-center h-screen">
       <img class="w-1/4" src="/logo3.png" alt="logo" />
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
