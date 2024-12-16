@@ -2,7 +2,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :user_signed_in?, :server_url
 
   def browser_id
-    cookies[:_karaoke_time_browser_id]
+    return @browser_id if defined?(@browser_id)
+    return if cookies[:_karaoke_time_browser_id].blank?
+    return unless cookies[:_karaoke_time_browser_id].starts_with?("{")
+    return unless cookies[:_karaoke_time_browser_id].ends_with?("}")
+
+    cookie_data = JSON.parse(cookies[:_karaoke_time_browser_id])
+    return unless cookie_data["id"].present?
+
+    @browser_id = cookie_data["id"]
+    @browser_id
   end
 
   def user_signed_in?
