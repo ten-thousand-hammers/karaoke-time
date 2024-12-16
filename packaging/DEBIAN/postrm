@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        # Stop the service
+        systemctl stop karaoke-time.service || true
+
+        # Disable the service
+        systemctl disable karaoke-time.service || true
+
+        # Remove the service file (optional)
+        rm -f /lib/systemd/system/karaoke-time.service || true
+
+        # Remove the data directory
+        rm -rf /var/lib/karaoke || true
+
+        # Remove the user
+        deluser karaoke-time || true
+
+        # Remove the group
+        delgroup karaoke-time || true
+        ;;
+esac
+
+exit 0

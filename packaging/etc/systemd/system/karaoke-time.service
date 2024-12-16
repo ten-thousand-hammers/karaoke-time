@@ -1,0 +1,17 @@
+[Unit]
+Description=Karaoke Time
+
+[Service]
+User=karaoke-time
+TimeoutStartSec=5min
+Environment=RAILS_ENV=production
+WorkingDirectory=/var/lib/karaoke
+ExecStartPre=/bin/rm -f /var/lib/karaoke/tmp/pids/server.pid
+ExecStartPre=/var/lib/karaoke/bin/bundle install
+ExecStartPre=/var/lib/karaoke/bin/rails db:create db:migrate
+ExecStartPre=/var/lib/karaoke/bin/rails assets:precompile
+ExecStartPre=/var/lib/karaoke/bin/rails r "YtDlpManager.update_binary"
+ExecStart=/var/lib/karaoke/bin/rails server
+
+[Install]
+WantedBy=multi-user.target

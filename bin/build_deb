@@ -1,0 +1,37 @@
+#!/bin/sh
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+VERSION=0.0.1
+ARCH=arm64
+
+# Clean up any previous builds
+rm -rf karaoke-time-*
+
+# Create a package directory
+mkdir -p karaoke-time-$VERSION-$ARCH
+cp -R packaging/* karaoke-time-$VERSION-$ARCH/
+
+# Copy the application files
+rsync -av \
+  --exclude="karaoke-time-$VERSION-$ARCH" \
+  --exclude=".vscode" \
+  --exclude=".zed" \
+  --exclude=".DS_Store" \
+  --exclude="log/*.log" \
+  --exclude="storage/*.sqlite3*" \
+  --exclude="config/master.key" \
+  --exclude="config/credentials.*" \
+  --exclude="packaging" \
+  --exclude="test" \
+  --exclude=".git*" \
+  --exclude=".ruby-lsp" \
+  --exclude=".dockerignore" \
+  --exclude=".envrc" \
+  --exclude="tmp" \
+  $DIR/.. karaoke-time-$VERSION-$ARCH/var/lib/karaoke/
+
+# Build the package
+dpkg-deb --build karaoke-time-$VERSION-$ARCH
+
+# Clean up
+rm -rf karaoke-time-$VERSION-$ARCH

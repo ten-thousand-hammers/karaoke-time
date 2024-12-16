@@ -1,0 +1,7 @@
+#!/usr/bin/make -f
+
+%:
+    dh $@ --with ruby
+
+override_dh_auto_install:
+    mkdir -p debian/myapp/usr/local/myapp

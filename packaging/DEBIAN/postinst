@@ -1,0 +1,35 @@
+#!/bin/sh
+set -e
+
+echo "Setup permissions"
+chown -R karaoke-time:karaoke-time /var/lib/karaoke
+
+echo "Installing gems"
+su - karaoke-time -c "RAILS_ENV=production bin/bundle install"
+echo "Creating a master_key"
+su - karaoke-time -c "RAILS_ENV=production bin/rails credentials:edit"
+echo "Creating the database"
+su - karaoke-time -c "RAILS_ENV=production bin/rails db:create"
+echo "Migrating the database"
+su - karaoke-time -c "RAILS_ENV=production bin/rails db:migrate"
+echo "Precompiling assets"
+su - karaoke-time -c "RAILS_ENV=production bin/rails assets:precompile"
+echo "Download the latest version of yt-dlp"
+su - karaoke-time -c "RAILS_ENV=production bin/rails r 'YtDlpManager.update_binary'"
+
+if ! systemctl is-enabled --quiet karaoke-time.service; then
+  echo "Enabling the service"
+  systemctl enable karaoke-time.service
+fi
+
+systemctl daemon-reload
+
+if systemctl is-active --quiet karaoke-time.service; then
+  echo "Restarting the service"
+  systemctl restart karaoke-time.service
+else
+  echo "Starting the service"
+  systemctl start karaoke-time.service
+fi
+
+exit 0

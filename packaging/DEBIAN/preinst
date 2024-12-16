@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+echo "Setup the user and group"
+groupadd karaoke-time || true
+adduser --system --home /var/lib/karaoke --ingroup karaoke-time --shell /bin/bash karaoke-time || true
+
+exit 0
