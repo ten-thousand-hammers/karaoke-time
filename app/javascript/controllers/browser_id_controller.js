@@ -1,11 +1,12 @@
+import { Controller } from "@hotwired/stimulus"
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
-export default class BrowserId {
-  constructor() {
-    this.setBrowserId();
+export default class extends Controller {
+  connect() {
+    this.load();
   }
 
-  async setBrowserId() {
+  async load() {
     if (document.cookie.indexOf('_karaoke_time_browser_id') > -1) {
       return;
     }
