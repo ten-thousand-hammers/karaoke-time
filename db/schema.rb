@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_15_192507) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_16_033327) do
   create_table "acts", force: :cascade do |t|
     t.integer "song_id", null: false
     t.datetime "created_at", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_15_192507) do
     t.integer "up_next_user_id"
     t.integer "now_playing_user_id"
     t.string "up_next_download_status"
+    t.integer "up_next_in"
     t.index ["now_playing_song_id"], name: "index_performances_on_now_playing_song_id"
     t.index ["now_playing_user_id"], name: "index_performances_on_now_playing_user_id"
     t.index ["up_next_song_id"], name: "index_performances_on_up_next_song_id"

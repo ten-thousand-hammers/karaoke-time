@@ -5,6 +5,7 @@
 #  id                      :integer          not null, primary key
 #  now_playing_url         :string
 #  up_next_download_status :string
+#  up_next_in              :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  now_playing_song_id     :integer
@@ -37,41 +38,48 @@ class Performance < ApplicationRecord
     first || create
   end
 
-  after_update_commit -> { 
+  after_update_commit -> {
     if now_playing_song_id_previously_changed?
-      broadcast_replace_to "splash", 
-        partial: "splash/now_playing", 
-        locals: { performance: self }, 
+      broadcast_replace_to "splash",
+        partial: "splash/now_playing",
+        locals: { performance: self },
         target: "now_playing"
 
-      broadcast_replace_to "home", 
-        partial: "home/now_playing", 
-        locals: { performance: self }, 
+      broadcast_replace_to "home",
+        partial: "home/now_playing",
+        locals: { performance: self },
         target: "now_playing"
 
-      broadcast_replace_to "splash", 
-        partial: "splash/video", 
-        locals: { performance: self }, 
-        target: "video"  
+      broadcast_replace_to "splash",
+        partial: "splash/video",
+        locals: { performance: self },
+        target: "video"
     end
 
-    if now_playing_song_id_previously_changed? || 
-       up_next_song_id_previously_changed? || 
+    if now_playing_song_id_previously_changed? ||
+       up_next_song_id_previously_changed? ||
        up_next_download_status_previously_changed?
-      broadcast_replace_to "splash", 
-        partial: "splash/logo", 
-        locals: { performance: self }, 
+      broadcast_replace_to "splash",
+        partial: "splash/logo",
+        locals: { performance: self },
         target: "logo"
 
-      broadcast_replace_to "splash", 
-          partial: "splash/up_next", 
-          locals: { performance: self }, 
+      broadcast_replace_to "splash",
+          partial: "splash/up_next",
+          locals: { performance: self },
           target: "up_next"
 
-      broadcast_replace_to "home", 
-        partial: "home/up_next", 
-        locals: { performance: self }, 
+      broadcast_replace_to "home",
+        partial: "home/up_next",
+        locals: { performance: self },
         target: "up_next"
+    end
+
+    if up_next_in_previously_changed?
+      broadcast_replace_to "splash",
+        partial: "splash/logo",
+        locals: { performance: self },
+        target: "logo"
     end
   }
 end

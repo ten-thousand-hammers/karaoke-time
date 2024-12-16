@@ -1,18 +1,25 @@
 class NextVideoJob < ApplicationJob
   queue_as :default
 
-  def perform
+  def perform(wait: 10.seconds)
     next_act = Act.order(created_at: :asc).first
-    
+
     up_next_song = Performance.instance.up_next_song
     up_next_user = Performance.instance.up_next_user
+
+    if up_next_song.present? && wait > 0
+      wait.times.each do |i|
+        Performance.instance.update!(up_next_in: wait - i)
+        sleep 1
+      end
+    end
 
     Performance.instance.update!(
       now_playing_song: nil,
       now_playing_user: nil,
     )
 
-    sleep 10
+    sleep 1
 
     Performance.instance.update!(
       now_playing_song: up_next_song,
@@ -22,8 +29,8 @@ class NextVideoJob < ApplicationJob
     )
 
     if up_next_song.present?
-      up_next_song.increment!(:plays) 
-      
+      up_next_song.increment!(:plays)
+
       if up_next_user.present?
         user_song = up_next_user.user_songs.find_or_initialize_by(song: up_next_song) do |us|
           us.plays = 0

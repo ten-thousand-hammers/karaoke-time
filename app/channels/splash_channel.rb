@@ -19,7 +19,7 @@ class SplashChannel < ApplicationCable::Channel
       now_playing_user: nil
     )
 
-    # Wait 15 seconds before starting the next song
-    NextVideoJob.set(wait: 15.seconds).perform_later
+    # Wait 10 seconds before starting the next song
+    NextVideoJob.perform_later(wait: 10.seconds)
   end
 end

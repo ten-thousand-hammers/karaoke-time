@@ -5,6 +5,7 @@
 #  id                      :integer          not null, primary key
 #  now_playing_url         :string
 #  up_next_download_status :string
+#  up_next_in              :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  now_playing_song_id     :integer
