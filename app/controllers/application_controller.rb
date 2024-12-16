@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user, :user_signed_in?, :server_url
-  before_action :set_browser_id
 
   def browser_id
     cookies[:_karaoke_time_browser_id]
