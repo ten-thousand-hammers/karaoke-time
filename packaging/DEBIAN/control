@@ -8,7 +8,7 @@ Homepage: https://github.com/ten-thousand-hammers/karaoke-time
 Package: karaoke-time
 Version: 0.0.1
 Architecture: arm64
-Depends: ruby (= 1:3.1)
+Depends: ruby (= 1:3.1), chromium-browser
 Description: Karaoke Time
   Karaoke Time is a web application that allows users to search for and
   queue up songs to be played in a karaoke environment. It is built on
