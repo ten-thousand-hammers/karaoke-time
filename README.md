@@ -42,6 +42,12 @@ https://raspberrypi.stackexchange.com/questions/144866/can-i-use-x11-on-the-new-
 
 It should ask you to restart after this is done.
 
+#### Change your resolution
+
+If you have a 4K TV, this can struggle with performance at that resolution. I would recommend changing your resolution down to 1920x1980.
+
+https://raspberrytips.com/change-resolution-raspberry-pi/
+
 #### Auto login as the karaoke user
 
 Make sure that it's automatically logging in the user you created when you installed the OS.
