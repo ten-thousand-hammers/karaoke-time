@@ -28,6 +28,20 @@ The ideal way I like to use this is for it to boot directly into a web browser i
 
 Let's go through some quick steps to do this
 
+#### Enable wayland
+
+The instructions below are for Wayland using the Wayfire desktop. It's possible it's not enabled on yours, so to do that you can go here.
+
+```
+raspi-config
+```
+
+On the menu go to Advanced -> Wayland and then choose the Wayland desktop.
+
+https://raspberrypi.stackexchange.com/questions/144866/can-i-use-x11-on-the-new-64-bit-os-instead-of-wayland/144867#144867
+
+It should ask you to restart after this is done.
+
 #### Auto login as the karaoke user
 
 Make sure that it's automatically logging in the user you created when you installed the OS.
