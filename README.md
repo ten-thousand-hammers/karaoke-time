@@ -64,7 +64,7 @@ Replace the **192.168.1.2** with your own IP address below. I'd suggest making s
 
 ```
 [autostart]
-1 = /usr/bin/chromium-browser http://192.168.1.2:3000/splash --start-maximized --autoplay-policy=no-user-gesture-required --kiosk --incognito --noerrdialogs --disable-translate --no-first-run --fast --fast-start --disable-infobars --disable-features=TranslateUI --ozone-platform=wayland --enable-features=OverlayScrollbar --disk-cache-dir=/dev/null --overscroll-history-navigation=0 --disable-pinch
+1 = /usr/local/bin/karaoke-time http://192.168.1.2:3000
 ```
 
 Save that file and you should be good to go. Try to restart the computer and see if it starts up and loads karaoke time.
