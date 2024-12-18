@@ -5,6 +5,7 @@ echo "Setup permissions"
 chown -R karaoke-time:karaoke-time /var/lib/karaoke
 
 echo "Installing gems"
+su - karaoke-time -c "bin/bundle config set --local path vendor/bundle"
 su - karaoke-time -c "RAILS_ENV=production bin/bundle install"
 echo "Creating a master_key"
 su - karaoke-time -c "RAILS_ENV=production bin/rails credentials:edit"
