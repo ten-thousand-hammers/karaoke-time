@@ -15,6 +15,9 @@ case "$1" in
         # Remove the data directory
         rm -rf /var/lib/karaoke || true
 
+        # Remove the bin
+        rm -f /usr/local/bin/karaoke-time || true
+
         # Remove the user
         deluser karaoke-time || true
 

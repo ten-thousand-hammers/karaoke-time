@@ -30,6 +30,9 @@ rsync -av \
   --exclude="tmp" \
   $DIR/.. karaoke-time-$VERSION-$ARCH/var/lib/karaoke/
 
+mkdir -p karaoke-time-$VERSION-$ARCH/usr/local/bin
+cp bin/kiosk-mode karaoke-time-$VERSION-$ARCH/usr/local/bin/karaoke-time
+
 # Build the package
 dpkg-deb --build karaoke-time-$VERSION-$ARCH
 
