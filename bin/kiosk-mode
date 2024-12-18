@@ -1,6 +1,12 @@
 #!/usr/bin/env sh
 
-/usr/bin/chromium-browser $1/splash \
+if [ -n "$1" ]; then
+  SERVER_URL="$1"
+else
+  SERVER_URL="$(hostname -I | awk '{print $1}'):3000"
+fi
+
+echo /usr/bin/chromium-browser $1/splash \
   --start-maximized \
   --autoplay-policy=no-user-gesture-required \
   --kiosk --incognito \
