@@ -7,19 +7,17 @@ class NextVideoJob < ApplicationJob
     up_next_song = Performance.instance.up_next_song
     up_next_user = Performance.instance.up_next_user
 
+    Performance.instance.update!(
+      now_playing_song: nil,
+      now_playing_user: nil,
+    )
+
     if up_next_song.present? && wait > 0
       wait.times.each do |i|
         Performance.instance.update!(up_next_in: wait - i)
         sleep 1
       end
     end
-
-    Performance.instance.update!(
-      now_playing_song: nil,
-      now_playing_user: nil,
-    )
-
-    sleep 1
 
     Performance.instance.update!(
       now_playing_song: up_next_song,
