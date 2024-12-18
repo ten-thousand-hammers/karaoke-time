@@ -6,7 +6,7 @@ else
   SERVER_URL="$(hostname -I | awk '{print $1}'):3000"
 fi
 
-echo /usr/bin/chromium-browser $1/splash \
+/usr/bin/chromium-browser $SERVER_URL/splash \
   --start-maximized \
   --autoplay-policy=no-user-gesture-required \
   --kiosk --incognito \
