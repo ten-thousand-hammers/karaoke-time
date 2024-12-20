@@ -60,11 +60,9 @@ _replace karaoke with whatever username you used when installing the os_
 
 Edit the file `/home/karaoke/.config/wayfire.ini` and go to the `[autostart]` section, or create one if it doesn't exist. Add 1 item there
 
-Replace the **192.168.1.2** with your own IP address below. I'd suggest making sure this machine has a static IP so this doesn't rotate
-
 ```
 [autostart]
-1 = /usr/local/bin/karaoke-time http://192.168.1.2:3000
+1 = /usr/local/bin/karaoke-time
 ```
 
 Save that file and you should be good to go. Try to restart the computer and see if it starts up and loads karaoke time.
