@@ -9,7 +9,7 @@ class QueueVideoJob < ApplicationJob
       Performance.instance.update!(
         up_next_song: song,
         up_next_user: user,
-        up_next_download_status: song.downloaded ? 'completed' : 'downloading'
+        up_next_download_status: song.downloaded ? "completed" : "downloading"
       )
     end
 

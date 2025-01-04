@@ -7,9 +7,9 @@ class SearchController < ApplicationController
     if search_term.present?
       cmd = [
         YtDlpManager::BINARY_PATH,
-        "-j", 
-        "--no-playlist", 
-        "--flat-playlist", 
+        "-j",
+        "--no-playlist",
+        "--flat-playlist",
         %(ytsearch10:"#{search_term} karaoke")
       ].join(" ")
       response = `#{cmd}`
@@ -20,7 +20,7 @@ class SearchController < ApplicationController
         .select { |obj| obj["title"].present? && obj["url"].present? }
 
       @songs = @results.map do |item|
-        song = Song.find_or_create_by(external_id: item["id"]) do |s|
+        Song.find_or_create_by(external_id: item["id"]) do |s|
           s.name = item["title"]
           s.url = item["url"]
           s.duration = item["duration"]

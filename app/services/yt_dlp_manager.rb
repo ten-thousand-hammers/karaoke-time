@@ -1,9 +1,9 @@
-require 'open-uri'
-require 'fileutils'
+require "open-uri"
+require "fileutils"
 
 class YtDlpManager
-  BINARY_URL = 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp'
-  BINARY_PATH = Rails.root.join('bin/yt-dlp').to_s
+  BINARY_URL = "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp"
+  BINARY_PATH = Rails.root.join("bin/yt-dlp").to_s
 
   def self.ensure_binary_exists
     return if File.exist?(BINARY_PATH)
@@ -12,10 +12,8 @@ class YtDlpManager
 
   def self.download_binary
     FileUtils.mkdir_p(File.dirname(BINARY_PATH))
-    File.open(BINARY_PATH, 'wb') do |file|
-      file.write(URI.open(BINARY_URL).read)
-    end
-    FileUtils.chmod(0755, BINARY_PATH)
+    File.binwrite(BINARY_PATH, URI.open(BINARY_URL).read) # rubocop:disable Security/Open
+    FileUtils.chmod(0o755, BINARY_PATH)
   end
 
   def self.update_binary

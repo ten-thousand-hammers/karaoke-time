@@ -28,23 +28,23 @@ class DownloadVideoJob < ApplicationJob
     ]
 
     begin
-      stdout, stderr, status = Open3.capture3(*cmd)
-      
+      _, stderr, status = Open3.capture3(*cmd)
+
       if status.success?
         song.update!(
           downloaded: true,
           download_status: :completed,
           path: File.join("videos", "#{song.external_id}.#{extension}")
         )
-        update_performance_status(song)
       else
         song.update!(
           download_status: :failed,
           download_error: stderr
         )
-        update_performance_status(song)
       end
-    rescue StandardError => e
+
+      update_performance_status(song)
+    rescue => e
       song.update!(
         download_status: :failed,
         download_error: e.message

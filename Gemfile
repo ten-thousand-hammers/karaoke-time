@@ -49,7 +49,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri ]
+  gem "debug", platforms: %i[mri]
   gem "standard"
 end
 
@@ -79,14 +79,14 @@ end
 gem "rqrcode", "~> 2.0"
 
 # OmniAuth Auth0 strategy and CSRF protection
-gem 'omniauth-auth0', '~> 3.0'
-gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
+gem "omniauth-auth0", "~> 3.0"
+gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.1"
 gem "kaminari", "~> 1.2"
 
 gem "annotate"
 
 gem "faker"
 
-gem 'rails-settings-cached'
+gem "rails-settings-cached"
 
 gem "brakeman"

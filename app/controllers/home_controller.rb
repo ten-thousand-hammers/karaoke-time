@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   end
 
   def skip
-    redirect_to '/auth/redirect/' unless session[:userinfo].present?
+    redirect_to "/auth/redirect/" unless session[:userinfo].present?
 
     if params[:act_id].present?
       act = Act.find(params[:act_id])
@@ -31,6 +31,6 @@ class HomeController < ApplicationController
       resize_gte_to: false,
       size: 160
     )
-    send_data png.to_s, type: 'image/png', disposition: 'inline'
+    send_data png.to_s, type: "image/png", disposition: "inline"
   end
 end

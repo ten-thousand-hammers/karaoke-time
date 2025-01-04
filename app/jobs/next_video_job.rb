@@ -9,7 +9,7 @@ class NextVideoJob < ApplicationJob
 
     Performance.instance.update!(
       now_playing_song: nil,
-      now_playing_user: nil,
+      now_playing_user: nil
     )
 
     if up_next_song.present? && wait > 0

@@ -26,17 +26,17 @@ class Act < ApplicationRecord
   belongs_to :user
   belongs_to :performance
 
-  after_create_commit -> { 
-    broadcast_replace_to "home", 
-      partial: "home/queue", 
-      locals: { performance: self.performance }, 
+  after_create_commit -> {
+    broadcast_replace_to "home",
+      partial: "home/queue",
+      locals: {performance: performance},
       target: "queue"
   }
 
   after_destroy_commit -> {
-    broadcast_replace_to "home", 
-      partial: "home/queue", 
-      locals: { performance: self.performance }, 
+    broadcast_replace_to "home",
+      partial: "home/queue",
+      locals: {performance: performance},
       target: "queue"
   }
 end
