@@ -22,7 +22,7 @@ run-name: "${{ github.event.head_commit.message || github.workflow }}"
 
 jobs:
   # GenerateChangelog:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ubuntu-24.04
   #   name: Generate Changelog Action
   #   if: ${{ github.actor != 'renovate' && github.ref != 'refs/heads/main' }}
   #   steps:
@@ -64,7 +64,7 @@ jobs:
   #         path: ./CHANGES.md
 
   CheckDependencies:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name == 'pull_request'
     name: Check Dependencies
     permissions:
@@ -77,7 +77,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   Setup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       BUNDLE_SILENCE_ROOT_WARNING: true
     steps:
@@ -111,7 +111,7 @@ jobs:
           key: ${{ steps.cache-rubygems.outputs.cache-primary-key }}
 
   TestRails:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [Setup]
     env:
       RAILS_ENV: test
@@ -184,7 +184,7 @@ jobs:
           path: coverage
 
   LintRuby:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [Setup]
     env:
       BUNDLE_SILENCE_ROOT_WARNING: true
@@ -223,7 +223,7 @@ jobs:
           detailed_summary: true
 
   # SecurityBrakeman:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ubuntu-24.04
   #   needs: [Setup]
   #   env:
   #     BUNDLE_SILENCE_ROOT_WARNING: true
@@ -246,7 +246,7 @@ jobs:
   #       run: bin/brakeman -z
 
   SecurityBundler:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [Setup]
     env:
       BUNDLE_PATH: vendor/bundle
