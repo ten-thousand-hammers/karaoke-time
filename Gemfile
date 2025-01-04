@@ -88,3 +88,5 @@ gem "annotate"
 gem "faker"
 
 gem 'rails-settings-cached'
+
+gem "brakeman"
