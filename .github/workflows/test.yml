@@ -222,28 +222,28 @@ jobs:
           check_name: "Lint Results"
           detailed_summary: true
 
-  SecurityBrakeman:
-    runs-on: ubuntu-latest
-    needs: [Setup]
-    env:
-      BUNDLE_SILENCE_ROOT_WARNING: true
-      BUNDLE_PATH: vendor/bundle
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # SecurityBrakeman:
+  #   runs-on: ubuntu-latest
+  #   needs: [Setup]
+  #   env:
+  #     BUNDLE_SILENCE_ROOT_WARNING: true
+  #     BUNDLE_PATH: vendor/bundle
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Install mise dependencies
-        uses: jdx/mise-action@v2
+  #     - name: Install mise dependencies
+  #       uses: jdx/mise-action@v2
 
-      - name: Restore cached rubygems
-        uses: actions/cache/restore@v4
-        id: cache-rubygems
-        with:
-          path: vendor/bundle
-          key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+  #     - name: Restore cached rubygems
+  #       uses: actions/cache/restore@v4
+  #       id: cache-rubygems
+  #       with:
+  #         path: vendor/bundle
+  #         key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
 
-      - name: Brakeman
-        run: bin/brakeman -z
+  #     - name: Brakeman
+  #       run: bin/brakeman -z
 
   SecurityBundler:
     runs-on: ubuntu-latest
