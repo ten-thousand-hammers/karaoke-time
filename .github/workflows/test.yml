@@ -21,47 +21,47 @@ permissions:
 run-name: "${{ github.event.head_commit.message || github.workflow }}"
 
 jobs:
-  GenerateChangelog:
-    runs-on: ubuntu-latest
-    name: Generate Changelog Action
-    if: ${{ github.actor != 'renovate' && github.ref != 'refs/heads/main' }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-          token: ${{ secrets.CHANGELOG_TOKEN }}
+  # GenerateChangelog:
+  #   runs-on: ubuntu-latest
+  #   name: Generate Changelog Action
+  #   if: ${{ github.actor != 'renovate' && github.ref != 'refs/heads/main' }}
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         repository: ${{ github.event.pull_request.head.repo.full_name }}
+  #         ref: ${{ github.event.pull_request.head.ref }}
+  #         fetch-depth: 0
+  #         token: ${{ secrets.CHANGELOG_TOKEN }}
 
-      - name: Check for CHANGES.md
-        id: check_changes
-        uses: andstor/file-existence-action@v3
-        with:
-          files: CHANGES.md
+  #     - name: Check for CHANGES.md
+  #       id: check_changes
+  #       uses: andstor/file-existence-action@v3
+  #       with:
+  #         files: CHANGES.md
 
-      - name: Generate a changelog
-        if: steps.check_changes.outputs.files_exists == 'false'
-        uses: orhun/git-cliff-action@v3
-        with:
-          config: cliff.toml
-          args: --unreleased
-        env:
-          OUTPUT: CHANGES.md
-          GITHUB_REPO: ${{ github.repository }}
+  #     - name: Generate a changelog
+  #       if: steps.check_changes.outputs.files_exists == 'false'
+  #       uses: orhun/git-cliff-action@v3
+  #       with:
+  #         config: cliff.toml
+  #         args: --unreleased
+  #       env:
+  #         OUTPUT: CHANGES.md
+  #         GITHUB_REPO: ${{ github.repository }}
 
-      - name: Commit and push CHANGELOG.md
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: CHANGES.md
-          message: "Generating CHANGES.md"
+  #     - name: Commit and push CHANGELOG.md
+  #       uses: EndBug/add-and-commit@v9
+  #       with:
+  #         add: CHANGES.md
+  #         message: "Generating CHANGES.md"
 
-      - name: Make sure we can read the CHANGELOG
-        uses: mindsers/changelog-reader-action@v2
-        with:
-          validation_level: none
-          version: "Unreleased"
-          path: ./CHANGES.md
+  #     - name: Make sure we can read the CHANGELOG
+  #       uses: mindsers/changelog-reader-action@v2
+  #       with:
+  #         validation_level: none
+  #         version: "Unreleased"
+  #         path: ./CHANGES.md
 
   CheckDependencies:
     runs-on: ubuntu-latest
