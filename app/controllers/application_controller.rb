@@ -25,8 +25,6 @@ class ApplicationController < ActionController::Base
       User.find_by(auth0_id: session[:userinfo]["sub"])
     elsif cookies[:_karaoke_time_browser_id].present?
       User.find_by(browser_id: cookies[:_karaoke_time_browser_id])
-    else
-      nil
     end
   end
 

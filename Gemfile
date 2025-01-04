@@ -1,9 +1,10 @@
 source "https://rubygems.org"
 
-ruby "3.1.2"
+ruby file: ".tool-versions"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
+gem "nokogiri", "1.16.8" # locking
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -49,7 +50,8 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri ]
+  gem "debug", platforms: %i[mri]
+  gem "standard"
 end
 
 group :development do
@@ -71,17 +73,21 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "simplecov", "~> 0.22.0", require: false
+  gem "simplecov-cobertura", require: false
 end
 
 gem "rqrcode", "~> 2.0"
 
 # OmniAuth Auth0 strategy and CSRF protection
-gem 'omniauth-auth0', '~> 3.0'
-gem 'omniauth-rails_csrf_protection', '~> 1.0', '>= 1.0.1'
+gem "omniauth-auth0", "~> 3.0"
+gem "omniauth-rails_csrf_protection", "~> 1.0", ">= 1.0.1"
 gem "kaminari", "~> 1.2"
 
 gem "annotate"
 
 gem "faker"
 
-gem 'rails-settings-cached'
+gem "rails-settings-cached"
+
+gem "brakeman"

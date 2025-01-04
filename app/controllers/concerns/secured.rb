@@ -23,7 +23,7 @@ module Secured
         return
       end
 
-      redirect_to '/auth/redirect/'
+      redirect_to "/auth/redirect/"
     end
   end
 

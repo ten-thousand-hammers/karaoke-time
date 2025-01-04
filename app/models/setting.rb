@@ -17,7 +17,7 @@ class Setting < RailsSettings::Base
 
   # Define your fields
   field :always_embed, default: false, type: :boolean
-  
+
   # field :host, type: :string, default: "http://localhost:3000"
   # field :default_locale, default: "en", type: :string
   # field :confirmable_enable, default: "0", type: :boolean

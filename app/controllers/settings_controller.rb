@@ -10,8 +10,8 @@ class SettingsController < ApplicationController
 
   def update_yt_dlp
     result = YtDlpManager.update_binary
-    render json: { 
-      success: result[:success], 
+    render json: {
+      success: result[:success],
       message: result[:message],
       version: YtDlpManager.version
     }

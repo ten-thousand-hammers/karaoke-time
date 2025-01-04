@@ -1,0 +1,270 @@
+name: "Test"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
+run-name: "${{ github.event.head_commit.message || github.workflow }}"
+
+jobs:
+  # GenerateChangelog:
+  #   runs-on: ubuntu-24.04
+  #   name: Generate Changelog Action
+  #   if: ${{ github.actor != 'renovate' && github.ref != 'refs/heads/main' }}
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         repository: ${{ github.event.pull_request.head.repo.full_name }}
+  #         ref: ${{ github.event.pull_request.head.ref }}
+  #         fetch-depth: 0
+  #         token: ${{ secrets.CHANGELOG_TOKEN }}
+
+  #     - name: Check for CHANGES.md
+  #       id: check_changes
+  #       uses: andstor/file-existence-action@v3
+  #       with:
+  #         files: CHANGES.md
+
+  #     - name: Generate a changelog
+  #       if: steps.check_changes.outputs.files_exists == 'false'
+  #       uses: orhun/git-cliff-action@v3
+  #       with:
+  #         config: cliff.toml
+  #         args: --unreleased
+  #       env:
+  #         OUTPUT: CHANGES.md
+  #         GITHUB_REPO: ${{ github.repository }}
+
+  #     - name: Commit and push CHANGELOG.md
+  #       uses: EndBug/add-and-commit@v9
+  #       with:
+  #         add: CHANGES.md
+  #         message: "Generating CHANGES.md"
+
+  #     - name: Make sure we can read the CHANGELOG
+  #       uses: mindsers/changelog-reader-action@v2
+  #       with:
+  #         validation_level: none
+  #         version: "Unreleased"
+  #         path: ./CHANGES.md
+
+  CheckDependencies:
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'pull_request'
+    name: Check Dependencies
+    permissions:
+      pull-requests: read
+      issues: read
+    steps:
+      - name: Check your dependencies
+        uses: gregsdennis/dependencies-action@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  Setup:
+    runs-on: ubuntu-24.04
+    env:
+      BUNDLE_SILENCE_ROOT_WARNING: true
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install mise dependencies
+        uses: jdx/mise-action@v2
+
+      - name: Restore cached rubygems
+        uses: actions/cache/restore@v4
+        id: cache-rubygems
+        with:
+          path: vendor/bundle
+          key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-
+
+      - name: Bundle install
+        env:
+          RAILS_ENV: test
+        run: |
+          gem install bundler --version $(cat Gemfile.lock | tail -n1 | xargs)
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Save rubygems
+        uses: actions/cache/save@v4
+        with:
+          path: vendor/bundle
+          key: ${{ steps.cache-rubygems.outputs.cache-primary-key }}
+
+  TestRails:
+    runs-on: ubuntu-24.04
+    needs: [Setup]
+    env:
+      RAILS_ENV: test
+      BUNDLE_SILENCE_ROOT_WARNING: true
+      BUNDLE_PATH: vendor/bundle
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install apt dependencies
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          # For chrome system testing
+          packages: libglib2.0-0 libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2 xvfb fonts-liberation libu2f-udev xdg-utils
+
+      - name: Install Google Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 131
+          install-chromedriver: false
+
+      - name: Install mise dependencies
+        uses: jdx/mise-action@v2
+
+      - name: Restore cached rubygems
+        uses: actions/cache/restore@v4
+        id: cache-rubygems
+        with:
+          path: vendor/bundle
+          key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: Set up database
+        run: |
+          if [ -f config/database.yml ]; then
+            bin/rails db:schema:load db:seed
+          else
+            echo "config/database.yml does not exist"
+          fi
+
+      - name: Precompile assets
+        run: bin/rails assets:precompile
+
+      - name: Run tests
+        env:
+          COVERAGE: true
+          WD_CHROME_PATH: "${{ steps.setup-chrome.outputs.chrome-path }}"
+        run: bin/rails test:everything
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure() # always run even if the previous step fails
+        with:
+          report_paths: "test/reports/**/TEST-*.xml"
+          check_name: "Test Results"
+          detailed_summary: true
+
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: capybara-screenshots
+          path: tmp/capybara/*.png
+
+      - name: Upload Code Coverage
+        uses: actions/upload-artifact@v4
+        if: success() || failure() # always run even if the previous step fails
+        with:
+          name: code-coverage
+          path: coverage
+
+  LintRuby:
+    runs-on: ubuntu-24.04
+    needs: [Setup]
+    env:
+      BUNDLE_SILENCE_ROOT_WARNING: true
+      BUNDLE_PATH: vendor/bundle
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install mise dependencies
+        uses: jdx/mise-action@v2
+
+      - name: Restore cached rubygems
+        uses: actions/cache/restore@v4
+        id: cache-rubygems
+        with:
+          path: vendor/bundle
+          key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: Lint Ruby files
+        run: |
+          if grep -e '    standard (.*)' Gemfile.lock; then
+            bin/bundle exec standardrb # --format junit > LINT-junit.xml
+          elif grep -e '    rubocop (.*)' Gemfile.lock; then
+            bin/bundle exec rubocop # --format junit > LINT-junit.xml
+          else
+            echo "No linter found"
+            exit 1
+          fi
+
+      - name: Publish Lint Report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure() # always run even if the previous step fails
+        with:
+          report_paths: "LINT-*.xml"
+          check_name: "Lint Results"
+          detailed_summary: true
+
+  # SecurityBrakeman:
+  #   runs-on: ubuntu-24.04
+  #   needs: [Setup]
+  #   env:
+  #     BUNDLE_SILENCE_ROOT_WARNING: true
+  #     BUNDLE_PATH: vendor/bundle
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Install mise dependencies
+  #       uses: jdx/mise-action@v2
+
+  #     - name: Restore cached rubygems
+  #       uses: actions/cache/restore@v4
+  #       id: cache-rubygems
+  #       with:
+  #         path: vendor/bundle
+  #         key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+
+  #     - name: Brakeman
+  #       run: bin/brakeman -z
+
+  SecurityBundler:
+    runs-on: ubuntu-24.04
+    needs: [Setup]
+    env:
+      BUNDLE_PATH: vendor/bundle
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install mise dependencies
+        uses: jdx/mise-action@v2
+
+      - name: Restore cached rubygems
+        uses: actions/cache/restore@v4
+        id: cache-rubygems
+        with:
+          path: vendor/bundle
+          key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: 'Bundler Audit'
+        uses: laicuRoot/bundler-audit-action@use-ruby-3.2.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
