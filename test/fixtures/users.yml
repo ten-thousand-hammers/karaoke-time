@@ -13,3 +13,9 @@
 #  auth0_id   :string
 #  browser_id :string
 #
+
+nate:
+  nickname: Nate
+
+kate:
+  nickname: Kate
