@@ -1,23 +1,543 @@
-# == Schema Information
-#
-# Table name: songs
-#
-#  id              :integer          not null, primary key
-#  download_error  :text
-#  download_status :integer
-#  downloaded      :boolean          default(FALSE)
-#  duration        :float
-#  file_problem    :boolean
-#  name            :string
-#  not_embeddable  :boolean
-#  path            :string
-#  plays           :integer          default(0), not null
-#  thumbnails      :json
-#  url             :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  external_id     :string
-#
-
+---
 jason_mraz_im_yours:
   external_id: kn8YiDSYcq4
+
+oasis__wonderwall_karaoke_version:
+  id: 1
+  external_id: R_EXyGWI9rU
+  name: Oasis - Wonderwall (Karaoke Version)
+  url: https://www.youtube.com/watch?v=R_EXyGWI9rU
+  duration: 291.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/R_EXyGWI9rU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAcClV8K4nOc9uLX5U6vNnRPkYqWA
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/R_EXyGWI9rU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDB4svTu-IiUNShZuvw-a3UryfUbQ
+    height: 404
+    width: 720
+  created_at: 2024-12-18 05:02:45 UTC
+  updated_at: 2024-12-18 05:02:48 UTC
+  path: videos/R_EXyGWI9rU.mp4
+  plays: 4
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+oasis__dont_look_back_in_anger_karaoke_version:
+  id: 2
+  external_id: GH5Brf0JPtA
+  name: Oasis - Don't Look Back In Anger (Karaoke Version)
+  url: https://www.youtube.com/watch?v=GH5Brf0JPtA
+  duration: 308.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/GH5Brf0JPtA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCvDr53mSmXPbGBEvvXExQsBmvS9w
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/GH5Brf0JPtA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDUia3db5cZPvU8f8aX_BQyGPvkVA
+    height: 404
+    width: 720
+  created_at: 2024-12-18 05:02:45 UTC
+  updated_at: 2025-01-05 14:49:29 UTC
+  path: videos/GH5Brf0JPtA.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+jason_mraz__im_yours_karaoke_version:
+  id: 11
+  external_id: kn8YiDSYcq4
+  name: Jason Mraz - I'm Yours (Karaoke Version)
+  url: https://www.youtube.com/watch?v=kn8YiDSYcq4
+  duration: 267.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/kn8YiDSYcq4/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB07G3PsdCOQFOKuMBBNeiUqD05cg
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/kn8YiDSYcq4/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBVZnZjlF3GeOncwahUObALG7bqWQ
+    height: 404
+    width: 720
+  created_at: 2024-12-18 05:03:30 UTC
+  updated_at: 2024-12-18 05:03:35 UTC
+  path: videos/kn8YiDSYcq4.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+green_day__basket_case_karaoke_version:
+  id: 21
+  external_id: UntbNt8rK4w
+  name: Green Day - Basket Case (Karaoke Version)
+  url: https://www.youtube.com/watch?v=UntbNt8rK4w
+  duration: 218.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/UntbNt8rK4w/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBzHZUKYrnnTCfWeewTx2A46qB-FQ
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/UntbNt8rK4w/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAVNtoBUEpWFUGvj-VtYsiVlbjJyA
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:48:45 UTC
+  updated_at: 2025-01-05 14:48:57 UTC
+  path: videos/UntbNt8rK4w.mp4
+  plays: 2
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+green_day__american_idiot_cc__karaoke_instrumental_lyrics:
+  id: 25
+  external_id: 9Ru8eZ1QOaM
+  name: "Green Day • American Idiot (CC) \U0001F3A4 [Karaoke] [Instrumental Lyrics]"
+  url: https://www.youtube.com/watch?v=9Ru8eZ1QOaM
+  duration: 181.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/9Ru8eZ1QOaM/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDfL1NIsgl9hX7nRpqFQy7jt9YVvw
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/9Ru8eZ1QOaM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDMLaufMTcN706mnwyC2TRru-xsvA
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:48:45 UTC
+  updated_at: 2025-01-05 14:49:04 UTC
+  path: videos/9Ru8eZ1QOaM.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+21_guns__green_day_hd_karaoke:
+  id: 29
+  external_id: CNVkvHUhDqA
+  name: 21 GUNS - Green Day (HD Karaoke)
+  url: https://www.youtube.com/watch?v=CNVkvHUhDqA
+  duration: 313.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/CNVkvHUhDqA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC5Dd268Gi6btZ-wn71e2xVhMNxDA
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/CNVkvHUhDqA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDQwPLGjL-PrVTDhHW7vVGmh6H9Fg
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:48:45 UTC
+  updated_at: 2025-01-05 14:49:10 UTC
+  path: videos/CNVkvHUhDqA.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+paramore__the_only_exception_karaoke_version:
+  id: 32
+  external_id: yCXcs2B8du0
+  name: Paramore - The Only Exception (Karaoke Version)
+  url: https://www.youtube.com/watch?v=yCXcs2B8du0
+  duration: 289.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/yCXcs2B8du0/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAjV321wPtvOXyUpio0PE_wAhlSig
+    height: 270
+    width: 480
+  created_at: 2025-01-05 14:51:06 UTC
+  updated_at: 2025-01-05 14:51:11 UTC
+  path: videos/yCXcs2B8du0.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+paramore__still_into_you_karaoke_version:
+  id: 33
+  external_id: 2lPtXYwT-A4
+  name: Paramore - Still Into You (Karaoke Version)
+  url: https://www.youtube.com/watch?v=2lPtXYwT-A4
+  duration: 249.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/2lPtXYwT-A4/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDDB_OdFxdHryEkm6LKOPpc2mA9MA
+    height: 270
+    width: 480
+  created_at: 2025-01-05 14:51:06 UTC
+  updated_at: 2025-01-05 14:51:13 UTC
+  path: videos/2lPtXYwT-A4.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+the_way__fastball__karaoke_version__karafun:
+  id: 42
+  external_id: 8In1MDhD3zA
+  name: The Way - Fastball | Karaoke Version | KaraFun
+  url: https://www.youtube.com/watch?v=8In1MDhD3zA
+  duration: 255.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/8In1MDhD3zA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCxali9TBrV0q2u4TtUVfRT4SkV6w
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/8In1MDhD3zA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLADKhqeuiFh3F35LlAeCt_wKbsIMQ
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:51:18 UTC
+  updated_at: 2025-01-05 14:51:24 UTC
+  path: videos/8In1MDhD3zA.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+fastball__out_of_my_head_karaoke_version:
+  id: 44
+  external_id: mrpp04k6940
+  name: Fastball - Out Of My Head (Karaoke Version)
+  url: https://www.youtube.com/watch?v=mrpp04k6940
+  duration: 152.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/mrpp04k6940/hq720.jpg?sqp=-oaymwE2COgCEMoBSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB1AaAAuADigIMCAAQARhlIGUoZTAP&rs=AOn4CLAh4QbkrEWlRCY3VltL--U2unpcxw
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/mrpp04k6940/hq720.jpg?sqp=-oaymwE2CNAFEJQDSFXyq4qpAygIARUAAIhCGAFwAcABBvABAfgB1AaAAuADigIMCAAQARhlIGUoZTAP&rs=AOn4CLBmXyj7YDMMOHnSsmSkvFh0elk07A
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:51:18 UTC
+  updated_at: 2025-01-05 14:51:26 UTC
+  path: videos/mrpp04k6940.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+cake__short_skirt_long_jacket_cc__karaoke_instrumental_lyrics:
+  id: 54
+  external_id: VLjUPQ2R4HA
+  name: "CAKE • Short Skirt, Long Jacket (CC) \U0001F3A4 [Karaoke] [Instrumental Lyrics]"
+  url: https://www.youtube.com/watch?v=VLjUPQ2R4HA
+  duration: 205.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/VLjUPQ2R4HA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCFXLxrR9c-ijWh0YoqyLyn0mOkdg
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/VLjUPQ2R4HA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDE0320GD4_KFtqbU-bFzZssZcROg
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:52:28 UTC
+  updated_at: 2025-01-05 14:52:34 UTC
+  path: videos/VLjUPQ2R4HA.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+i_will_survive__cake__karaoke_version__karafun:
+  id: 55
+  external_id: 1ZBYTDnv1VM
+  name: I Will Survive - Cake | Karaoke Version | KaraFun
+  url: https://www.youtube.com/watch?v=1ZBYTDnv1VM
+  duration: 318.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/1ZBYTDnv1VM/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAfPc4NJWSyvapNCiNgMWWJW3ujCw
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/1ZBYTDnv1VM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAlQ6xy7EP93TeNmo1-_YTgwLDlpw
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:52:28 UTC
+  updated_at: 2025-01-05 14:52:36 UTC
+  path: videos/1ZBYTDnv1VM.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+cake__stickshifts_and_safetybelts_karaoke:
+  id: 59
+  external_id: B14Rw4z-CnQ
+  name: Cake - Stickshifts and Safetybelts [Karaoke]
+  url: https://www.youtube.com/watch?v=B14Rw4z-CnQ
+  duration: 128.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/B14Rw4z-CnQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAnIY77ZbZcnIVcPUFAbW6tBEr9Rg
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/B14Rw4z-CnQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAS-lPZt0Bjmc3fXL9OEKdnH2qbtg
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:52:28 UTC
+  updated_at: 2025-01-05 14:52:38 UTC
+  path: videos/B14Rw4z-CnQ.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+weezer__say_it_aint_so_cc__karaoke_instrumental_lyrics:
+  id: 62
+  external_id: WAC36_fIa-Q
+  name: "Weezer • Say It Ain't So (CC) \U0001F3A4 [Karaoke] [Instrumental Lyrics]"
+  url: https://www.youtube.com/watch?v=WAC36_fIa-Q
+  duration: 260.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/WAC36_fIa-Q/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBQ_yNU_A2t3MhXB9ricmrhttwMgA
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/WAC36_fIa-Q/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCEJ9Dsrg9c78LtN4S3NRvzRaVjDQ
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:52:40 UTC
+  updated_at: 2025-01-05 14:52:42 UTC
+  path: videos/WAC36_fIa-Q.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+weezer__island_in_the_sun_cc_upgraded_video__karaoke_instrumental:
+  id: 64
+  external_id: SSKLg4X36KU
+  name: "Weezer • Island In The Sun (CC) (Upgraded Video) \U0001F3A4 [Karaoke] [Instrumental]"
+  url: https://www.youtube.com/watch?v=SSKLg4X36KU
+  duration: 209.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/SSKLg4X36KU/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAfJuzsa9BmwkMLfg0wqMQDey5X5Q
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/SSKLg4X36KU/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAEpae7F6GUgg467lH1z5VYxIB4zw
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:52:40 UTC
+  updated_at: 2025-01-05 14:52:47 UTC
+  path: videos/SSKLg4X36KU.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+weezer__hash_pipe_cc__karaoke_instrumental_lyrics:
+  id: 69
+  external_id: i3GDEq94Gzs
+  name: "Weezer • Hash Pipe (CC) \U0001F3A4 [Karaoke] [Instrumental Lyrics]"
+  url: https://www.youtube.com/watch?v=i3GDEq94Gzs
+  duration: 178.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/i3GDEq94Gzs/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBXMg100F9P6dSu4MjHcndxKmtjIQ
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/i3GDEq94Gzs/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAkUwEQ5RVe3NThQkNlfO6ZFYAYtA
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:52:41 UTC
+  updated_at: 2025-01-05 14:52:49 UTC
+  path: videos/i3GDEq94Gzs.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+bob_dylandont_think_twice_its_all_right_karaoke_version:
+  id: 72
+  external_id: fV8nehSKsx8
+  name: Bob Dylan-Don't Think Twice, It's All Right (Karaoke Version)
+  url: https://www.youtube.com/watch?v=fV8nehSKsx8
+  duration: 226.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/fV8nehSKsx8/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBKP5k_XDwnhz6X7p2-T3_T3_yG_Q
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/fV8nehSKsx8/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLArQ1otu0XiZMhAL9TXZqYY9l6OSQ
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:55:03 UTC
+  updated_at: 2025-01-05 14:55:09 UTC
+  path: videos/fV8nehSKsx8.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+mr._tambourine_man__bob_dylan__karaoke_version__karafun:
+  id: 80
+  external_id: IZrOUFIV2ac
+  name: Mr. Tambourine Man - Bob Dylan | Karaoke Version | KaraFun
+  url: https://www.youtube.com/watch?v=IZrOUFIV2ac
+  duration: 324.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/IZrOUFIV2ac/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLB5Aznj3u1G4WKVASO9qe8uonqxNw
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/IZrOUFIV2ac/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAspAXEeGj6ArQk6lRmyGXuvZOwlA
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:55:03 UTC
+  updated_at: 2025-01-05 14:55:14 UTC
+  path: videos/IZrOUFIV2ac.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+radiohead__creep_karaoke_version:
+  id: 82
+  external_id: 3WLy3AblvmQ
+  name: Radiohead - Creep (Karaoke Version)
+  url: https://www.youtube.com/watch?v=3WLy3AblvmQ
+  duration: 258.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/3WLy3AblvmQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC3u6ICP2TpZMv98CAwFOm7Kt2H8A
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/3WLy3AblvmQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDvJ9Y8ZvSkYev7GOCuxJ9m2K1nqw
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:55:17 UTC
+  updated_at: 2025-01-05 14:55:21 UTC
+  path: videos/3WLy3AblvmQ.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+radiohead__high_and_dry_cc_karaoke_instrumental_lyrics:
+  id: 84
+  external_id: f75AmOYk0vY
+  name: Radiohead • High & Dry (CC) [Karaoke Instrumental Lyrics]
+  url: https://www.youtube.com/watch?v=f75AmOYk0vY
+  duration: 261.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/f75AmOYk0vY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBTjsdE3_Jxs6wyI6Knvmj20cfxWg
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/f75AmOYk0vY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAHGH5B7BOXJPe6-C1aaxydzg4AuQ
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:55:17 UTC
+  updated_at: 2025-01-05 14:55:27 UTC
+  path: videos/f75AmOYk0vY.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+olivia_rodrigo__vampire_karaoke_version:
+  id: 92
+  external_id: xpha1FmOjLA
+  name: Olivia Rodrigo - vampire (Karaoke Version)
+  url: https://www.youtube.com/watch?v=xpha1FmOjLA
+  duration: 227.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/xpha1FmOjLA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLARwEvUY-Gxy4vy0x11Ldow9ScYLQ
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/xpha1FmOjLA/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCYFpoPOg3WcSGLNANqPjfxKJJ5mw
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:56:21 UTC
+  updated_at: 2025-01-05 14:56:26 UTC
+  path: videos/xpha1FmOjLA.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+vampire_weekend__a_punk_cc_upgraded_video__karaoke_instrumental_lyrics:
+  id: 102
+  external_id: CDg7PgqFIdM
+  name: "Vampire Weekend • A Punk (CC) (Upgraded Video) \U0001F3A4 [Karaoke] [Instrumental
+    Lyrics]"
+  url: https://www.youtube.com/watch?v=CDg7PgqFIdM
+  duration: 145.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/CDg7PgqFIdM/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBWWaqA9TmuJsgnXzaBEO32M5ZKQg
+    height: 270
+    width: 480
+  created_at: 2025-01-05 14:56:28 UTC
+  updated_at: 2025-01-05 14:56:34 UTC
+  path: videos/CDg7PgqFIdM.mp4
+  plays: 2
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+maroon_5__sugar_karaoke_version:
+  id: 119
+  external_id: PqX8aA6w4bM
+  name: Maroon 5 - Sugar (Karaoke Version)
+  url: https://www.youtube.com/watch?v=PqX8aA6w4bM
+  duration: 257.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/PqX8aA6w4bM/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCVF89bY1wITqgjPAuQs5wLLu3MXQ
+    height: 270
+    width: 480
+  created_at: 2025-01-05 14:57:02 UTC
+  updated_at: 2025-01-05 14:57:10 UTC
+  path: videos/PqX8aA6w4bM.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+justin_timberlake__cry_me_a_river_karaoke_version:
+  id: 124
+  external_id: 6w5mdZZtt-Y
+  name: Justin Timberlake - Cry Me A River (Karaoke Version)
+  url: https://www.youtube.com/watch?v=6w5mdZZtt-Y
+  duration: 305.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/6w5mdZZtt-Y/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAThwAdYKQm7oTgJTDDpSKnXznmdg
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/6w5mdZZtt-Y/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCQDu_sA-ui0YpoRiDOioYt74gqzg
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:57:13 UTC
+  updated_at: 2025-01-05 14:57:20 UTC
+  path: videos/6w5mdZZtt-Y.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
+the_cardigans__lovefool_karaoke_version:
+  id: 132
+  external_id: A7gF5FAs6zQ
+  name: The Cardigans - Lovefool (Karaoke Version)
+  url: https://www.youtube.com/watch?v=A7gF5FAs6zQ
+  duration: 218.0
+  thumbnails:
+  - url: https://i.ytimg.com/vi/A7gF5FAs6zQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAeJIhzkMIBPE1poQcRrJUflLEs8w
+    height: 202
+    width: 360
+  - url: https://i.ytimg.com/vi/A7gF5FAs6zQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDk-b1Q-uLVKrB5KiGvYEor7d99Jw
+    height: 404
+    width: 720
+  created_at: 2025-01-05 14:58:24 UTC
+  updated_at: 2025-01-05 14:58:29 UTC
+  path: videos/A7gF5FAs6zQ.mp4
+  plays: 1
+  downloaded: true
+  download_error:
+  download_status: completed
+  file_problem:
+  not_embeddable:
