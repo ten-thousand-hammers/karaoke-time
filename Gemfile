@@ -75,6 +75,7 @@ group :test do
   gem "selenium-webdriver"
   gem "simplecov", "~> 0.22.0", require: false
   gem "simplecov-cobertura", require: false
+  gem "mocha"
 end
 
 gem "rqrcode", "~> 2.0"
