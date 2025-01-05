@@ -15,7 +15,9 @@
 #
 
 nate:
+  browser_id: <%= SecureRandom.uuid %>
   nickname: Nate
 
 kate:
+  browser_id: <%= SecureRandom.uuid %>
   nickname: Kate

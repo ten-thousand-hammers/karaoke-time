@@ -11,5 +11,8 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def sign_in(user)
+      cookies[:_karaoke_time_browser_id] = user.browser_id
+    end
   end
 end
