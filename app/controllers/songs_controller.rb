@@ -42,16 +42,19 @@ class SongsController < ApplicationController
       File.delete(file_path) if File.exist?(file_path)
     end
 
-    # Remove from database
+    # Skip the song if it is currently playing
+    if Performance.instance.now_playing_song == @song
+      NextVideoJob.perform_now
+    end
+
+    # Skip the song if it is in the up next queue
     if Performance.instance.up_next_song == @song
       SkipUpNextJob.perform_now
     end
 
-    if Performance.instance.now_playing_song == @song
-      NextVideoJob.perform_later
-    end
-
+    # Remove from database
     @song.user_songs.destroy_all
+    @song.acts.destroy_all
     @song.destroy
 
     respond_to do |format|

@@ -47,6 +47,7 @@ class SearchController < ApplicationController
 
   private
 
+  # :nocov:
   def ytsearch10(search_term)
     raise "You cannot run this in test" if Rails.env.test?
 
@@ -59,4 +60,5 @@ class SearchController < ApplicationController
     ].join(" ")
     response = `#{cmd}`
   end
+  # :nocov:
 end
