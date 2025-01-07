@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_16_033327) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_07_035822) do
   create_table "acts", force: :cascade do |t|
     t.integer "song_id", null: false
     t.datetime "created_at", null: false
@@ -80,7 +80,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_16_033327) do
     t.string "nickname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "auth0_id"
     t.integer "avatar"
     t.string "browser_id"
   end

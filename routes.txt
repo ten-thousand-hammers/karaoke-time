@@ -7,10 +7,6 @@
                                   splash GET    /splash(.:format)                                                                                 splash#index
                                     skip POST   /skip(.:format)                                                                                   home#skip
                                   qrcode GET    /qrcode(.:format)                                                                                 home#qrcode
-                     auth_auth0_callback GET    /auth/auth0/callback(.:format)                                                                    auth0#callback
-                            auth_failure GET    /auth/failure(.:format)                                                                           auth0#failure
-                             auth_logout GET    /auth/logout(.:format)                                                                            auth0#logout
-                           auth_redirect GET    /auth/redirect(.:format)                                                                          auth0#redirect
                             edit_profile GET    /profile/:id/edit(.:format)                                                                       profile#edit
                                  profile PATCH  /profile/:id(.:format)                                                                            profile#update
                                          PUT    /profile/:id(.:format)                                                                            profile#update
