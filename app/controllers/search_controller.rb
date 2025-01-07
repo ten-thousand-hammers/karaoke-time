@@ -5,14 +5,7 @@ class SearchController < ApplicationController
     search_term = params[:search]
 
     if search_term.present?
-      cmd = [
-        YtDlpManager::BINARY_PATH,
-        "-j",
-        "--no-playlist",
-        "--flat-playlist",
-        %(ytsearch10:"#{search_term} karaoke")
-      ].join(" ")
-      response = `#{cmd}`
+      response = ytsearch10(search_term)
 
       @results = response
         .split("\n")
@@ -51,4 +44,21 @@ class SearchController < ApplicationController
       }
     end
   end
+
+  private
+
+  # :nocov:
+  def ytsearch10(search_term)
+    raise "You cannot run this in test" if Rails.env.test?
+
+    cmd = [
+      YtDlpManager::BINARY_PATH,
+      "-j",
+      "--no-playlist",
+      "--flat-playlist",
+      %(ytsearch10:"#{search_term} karaoke")
+    ].join(" ")
+    `#{cmd}`
+  end
+  # :nocov:
 end

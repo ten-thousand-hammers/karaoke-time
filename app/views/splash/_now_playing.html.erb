@@ -1,21 +1,21 @@
 <%= turbo_frame_tag "now_playing", class: "#{performance.now_playing_song.present? ? '' : 'hidden'} absolute right-0 z-10", data: { splash_target: "top" } do %>
 <div id="now-playing" class="p-4 text-right text-xl 2xl:text-4xl">
   <div class="bg-black p-4 rounded-xl bg-opacity-60 text-opacity-100">
-    <p id="now-playing-song" 
-        data-splash-target="title" 
-        class="text-white" 
+    <h2 id="now-playing-song"
+        data-splash-target="title"
+        class="text-white"
         style="margin-bottom: 5px">
       <%= performance.now_playing_song&.name %>
-    </p>
+    </h2>
     <div class="text-green-500 flex items-center justify-end gap-2">
       <% if performance.now_playing_user&.avatar %>
-        <%= image_tag "/images/avatars/avatar_#{performance.now_playing_user.avatar}.png", 
+        <%= image_tag performance.now_playing_user.avatar_url,
             class: "w-8 h-8 rounded-full border-2 border-green-500",
             alt: "#{performance.now_playing_user.nickname}'s avatar" %>
       <% end %>
       <i class="fa-solid fa-microphone" title="Current singer"></i>
-      <span id="now-playing-singer" 
-            data-splash-target="singer"><%= performance.now_playing_user&.nickname %></span>
+      <h3 id="now-playing-singer"
+            data-splash-target="singer"><%= performance.now_playing_user&.nickname %></h3>
     </div>
   </div>
 </div>

@@ -1,14 +1,14 @@
 <%= turbo_frame_tag "up_next", class: "#{performance.up_next_song.present? ? '' : 'hidden'} text-white text-xl 2xl:text-4xl stroke ml-auto text-right", data: { splash_target: "upNext" } do %>
   <% if performance.now_playing_song.present? %>
     <div class="bg-black p-4 rounded-xl bg-opacity-60 text-opacity-100">
-      <b class="text-white">Up next: <span data-splash-target="upNextTitle" class="text-amber-500 font-normal">
+      <h2 class="text-white inline">Up next</h2>: <h3 data-splash-target="upNextTitle" class="inline text-amber-500 font-normal">
         <%= performance.up_next_song&.name %>
         <% if performance.up_next_download_status == 'downloading' %>
           <i class="fa-solid fa-circle-notch fa-spin text-yellow-500" title="Downloading..."></i>
         <% elsif performance.up_next_download_status == 'failed' %>
           <i class="fa-solid fa-triangle-exclamation text-red-500" title="Download failed"></i>
         <% end %>
-      </span></b>
+      </h3>
       <span id="up-next-song"></span>
       <div class="flex items-center justify-end gap-2">
         <b class="text-white">Next singer: </b>
@@ -16,7 +16,7 @@
           <%= image_tag performance.up_next_user.avatar_url, class: "w-8 h-8 rounded-full", alt: "#{performance.up_next_user.nickname}'s avatar" %>
         <% end %>
         <i class="fa-solid fa-microphone text-green-500" title="Next singer"></i>
-        <span data-splash-target="upNextSinger" id="up-next-singer" class="text-green-500 font-normal"><%= performance.up_next_user&.nickname %></span>
+        <h4 data-splash-target="upNextSinger" id="up-next-singer" class="inline text-green-500 font-normal"><%= performance.up_next_user&.nickname %></h4>
       </div>
     </div>
   <% end %>
