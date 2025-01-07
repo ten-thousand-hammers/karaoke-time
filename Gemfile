@@ -76,6 +76,7 @@ group :test do
   gem "simplecov", "~> 0.22.0", require: false
   gem "simplecov-cobertura", require: false
   gem "mocha"
+  gem "webmock"
 end
 
 gem "rqrcode", "~> 2.0"
