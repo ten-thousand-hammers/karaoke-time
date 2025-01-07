@@ -4,9 +4,9 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   test "index" do
     get root_url
     assert_response :success
-    assert_select 'h2', text: 'Now Playing'
-    assert_select 'h2', text: 'Next Song'
-    assert_select 'h2', text: 'Queue'
+    assert_select "h2", text: "Now Playing"
+    assert_select "h2", text: "Next Song"
+    assert_select "h2", text: "Queue"
   end
 
   test "can render qrcode" do
@@ -41,7 +41,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     )
 
     assert_enqueued_with(job: SkipUpNextJob) do
-      post skip_url, params: { up_next: true }
+      post skip_url, params: {up_next: true}
       assert_response :no_content
     end
 
@@ -69,7 +69,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     )
 
     assert_enqueued_with(job: SkipActJob) do
-      post skip_url, params: { act_id: act.id }
+      post skip_url, params: {act_id: act.id}
       assert_response :no_content
     end
 

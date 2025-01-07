@@ -4,12 +4,12 @@ class HomeControllerSessionTest < ActionDispatch::IntegrationTest
   test "is not logged in by default" do
     get root_url
     assert_response :success
-    assert_select 'footer' do
-      assert_select 'a i.fa-solid.fa-house-user'
-      assert_select 'a i.fa-solid.fa-music'
-      assert_select 'a i.fa-solid.fa-magnifying-glass'
-      assert_select 'a i.fa-solid.fa-gear'
-      assert_select 'a i.fa-regular.fa-face-smile', count: 0
+    assert_select "footer" do
+      assert_select "a i.fa-solid.fa-house-user"
+      assert_select "a i.fa-solid.fa-music"
+      assert_select "a i.fa-solid.fa-magnifying-glass"
+      assert_select "a i.fa-solid.fa-gear"
+      assert_select "a i.fa-regular.fa-face-smile", count: 0
     end
   end
 
@@ -18,8 +18,8 @@ class HomeControllerSessionTest < ActionDispatch::IntegrationTest
     cookies[:_karaoke_time_browser_id] = user.browser_id
     get root_url
     assert_response :success
-    assert_select 'footer' do
-      assert_select 'a i.fa-regular.fa-face-smile'
+    assert_select "footer" do
+      assert_select "a i.fa-regular.fa-face-smile"
     end
   end
 
@@ -31,8 +31,8 @@ class HomeControllerSessionTest < ActionDispatch::IntegrationTest
     })
     get root_url
     assert_response :success
-    assert_select 'footer' do
-      assert_select 'a i.fa-regular.fa-face-smile'
+    assert_select "footer" do
+      assert_select "a i.fa-regular.fa-face-smile"
     end
   end
 end

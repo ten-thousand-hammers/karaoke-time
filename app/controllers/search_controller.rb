@@ -58,7 +58,7 @@ class SearchController < ApplicationController
       "--flat-playlist",
       %(ytsearch10:"#{search_term} karaoke")
     ].join(" ")
-    response = `#{cmd}`
+    `#{cmd}`
   end
   # :nocov:
 end
