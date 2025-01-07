@@ -52,6 +52,7 @@ class SplashTest < ApplicationSystemTestCase
     visit splash_url
     click_on "Confirm"
     current_user = users(:nate)
+    current_user.update!(avatar: 1)
     song = songs(:oasis__wonderwall_karaoke_version)
     FileUtils.cp Rails.root.join("test", "fixtures", "files", "sample.mp4"), Rails.root.join("public", "videos", "#{song.external_id}.mp4")
     begin
@@ -63,6 +64,7 @@ class SplashTest < ApplicationSystemTestCase
       assert_selector "#now-playing" do
         assert_selector "h2", text: song.name
         assert_selector "h3", text: current_user.nickname
+        assert_selector "img[src='/images/avatars/avatar_1.png']"
       end
     ensure
       File.delete(Rails.root.join("public", "videos", "#{song.external_id}.mp4"))

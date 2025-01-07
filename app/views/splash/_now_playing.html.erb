@@ -9,7 +9,7 @@
     </h2>
     <div class="text-green-500 flex items-center justify-end gap-2">
       <% if performance.now_playing_user&.avatar %>
-        <%= image_tag "/images/avatars/avatar_#{performance.now_playing_user.avatar}.png",
+        <%= image_tag performance.now_playing_user.avatar_url,
             class: "w-8 h-8 rounded-full border-2 border-green-500",
             alt: "#{performance.now_playing_user.nickname}'s avatar" %>
       <% end %>

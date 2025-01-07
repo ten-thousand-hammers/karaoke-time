@@ -30,8 +30,4 @@ class Song < ApplicationRecord
   def mark_file_problem!
     update!(file_problem: true)
   end
-
-  def resolve_file_problem!
-    update!(file_problem: false)
-  end
 end
