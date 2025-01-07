@@ -30,14 +30,6 @@
           <i class="text-3xl w-16 fa-regular fa-face-smile"></i>
         <% end %>
       </div>
-
-      <% if current_user&.auth0_id.present? %>
-        <div>
-          <%= link_to auth_logout_url do %>
-            <i class="text-3xl w-16 fa-solid fa-arrow-right-to-bracket"></i>
-          <% end %>
-        </div>
-      <% end %>
     <% end %>
   </div>
 </footer>
