@@ -4,12 +4,12 @@
           !performance.now_playing_song.file_problem &&
           !Setting.always_embed %>
       <video
-        data-splash-target="video"
-        autoplay
-        class="h-screen w-screen"
-        data-action="ended->splash#ended permissions:accepted->splash#play">
-          <source type="video/mp4" src="/<%= performance.now_playing_song&.path %>" />
-        </video>
+          data-splash-target="video"
+          autoplay
+          class="h-screen w-screen"
+          data-action="ended->splash#ended permissions:accepted->splash#play">
+        <source type="video/mp4" src="/<%= performance.now_playing_song&.path %>" />
+      </video>
     <% elsif performance.now_playing_song.not_embeddable %>
       <div class="flex items-center justify-center h-screen w-screen bg-blue-950">
         <div class="text-white text-center">
@@ -28,5 +28,4 @@
       </div>
     <% end %>
   <% end %>
-
 <% end %>

@@ -2,8 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 // import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
 export default class extends Controller {
-
-
   connect() {
     this.version = 1
     this.load();

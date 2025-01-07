@@ -1,7 +1,7 @@
 class QueueVideoJob < ApplicationJob
   queue_as :default
 
-  def perform(song, user)
+  def perform(song, user, wait: 10.seconds)
     # First create the act or update performance
     if Performance.instance.up_next_song.present?
       Act.create!(performance: Performance.instance, song: song, user: user)
@@ -21,6 +21,6 @@ class QueueVideoJob < ApplicationJob
 
     return if Performance.instance.now_playing_song.present?
 
-    NextVideoJob.perform_later
+    NextVideoJob.perform_later(wait: wait)
   end
 end

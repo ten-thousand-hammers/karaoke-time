@@ -1,6 +1,6 @@
 class SplashChannel < ApplicationCable::Channel
   def subscribed
-    puts "#{current_id} subscribed to splash channel"
+    # puts "#{current_id} subscribed to splash channel"
     stream_from "splash"
   end
 

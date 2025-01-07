@@ -1,11 +1,12 @@
 <%= turbo_stream_from "splash" %>
 
-<div data-controller="splash hide-mouse"
+<div id="splash"
+     data-controller="splash hide-mouse"
      data-splash-state-value="idle"
      data-action="mousemove->hide-mouse#mousemove"
      class="bg-blue-950 h-screen w-screen">
   <%= render "now_playing", performance: @performance %>
-  
+
   <%= render "logo", performance: @performance %>
 
   <%= render "video", performance: @performance %>
