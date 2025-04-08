@@ -170,7 +170,7 @@ GEM
       ruby2_keywords (>= 0.0.5)
     msgpack (1.7.2)
     mutex_m (0.3.0)
-    net-imap (0.5.5)
+    net-imap (0.5.6)
       date
       net-protocol
     net-pop (0.1.2)
@@ -183,6 +183,8 @@ GEM
     nokogiri (1.16.8-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.16.8-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.8-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.8-x86_64-linux)
       racc (~> 1.4)
@@ -198,7 +200,7 @@ GEM
     puma (6.5.0)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.1.8)
+    rack (3.1.12)
     rack-session (2.1.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -314,6 +316,7 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.7.3-aarch64-linux)
     sqlite3 (1.7.3-arm64-darwin)
+    sqlite3 (1.7.3-x86_64-darwin)
     sqlite3 (1.7.3-x86_64-linux)
     standard (1.42.1)
       language_server-protocol (~> 3.17.0.2)
@@ -333,6 +336,8 @@ GEM
     tailwindcss-rails (2.6.0-aarch64-linux)
       railties (>= 7.0.0)
     tailwindcss-rails (2.6.0-arm64-darwin)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.6.0-x86_64-darwin)
       railties (>= 7.0.0)
     tailwindcss-rails (2.6.0-x86_64-linux)
       railties (>= 7.0.0)
@@ -367,6 +372,7 @@ PLATFORMS
   aarch64-linux
   arm64-darwin-22
   arm64-darwin-23
+  x86_64-darwin-24
   x86_64-linux
 
 DEPENDENCIES
