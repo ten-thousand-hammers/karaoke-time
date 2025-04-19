@@ -4,19 +4,34 @@ set -e
 echo "Setup permissions"
 chown -R karaoke-time:karaoke-time /var/lib/karaoke
 
-echo "Installing gems"
-su - karaoke-time -c "bin/bundle config set --local path vendor/bundle"
-su - karaoke-time -c "RAILS_ENV=production bin/bundle install"
-echo "Creating a master_key"
-su - karaoke-time -c "RAILS_ENV=production bin/rails credentials:edit"
-echo "Creating the database"
-su - karaoke-time -c "RAILS_ENV=production bin/rails db:create"
-echo "Migrating the database"
-su - karaoke-time -c "RAILS_ENV=production bin/rails db:migrate"
-echo "Precompiling assets"
-su - karaoke-time -c "RAILS_ENV=production bin/rails assets:precompile"
+echo "Activate ruby version and installing gems"
+sudo -u karaoke-time bash <<'EOF'
+  cd ~
+  source ~/.bashrc
+  bin/mise install
+  gem install bundler:2.5.6 --install-dir ~/.local/share/gem/ruby/3.1.0
+  bin/bundle config set --local path vendor/bundle
+  RAILS_ENV=production bin/bundle install
+EOF
+
+echo "Setup the database"
+sudo -u karaoke-time bash <<'EOF'
+  cd ~
+  source ~/.bashrc
+  export RAILS_ENV=production
+  bin/rails credentials:edit
+  bin/rails db:create
+  bin/rails db:migrate
+  bin/rails assets:precompile
+EOF
+
 echo "Download the latest version of yt-dlp"
-su - karaoke-time -c "RAILS_ENV=production bin/rails r 'YtDlpManager.update_binary'"
+sudo -u karaoke-time bash <<'EOF'
+  cd ~
+  source ~/.bashrc
+  export RAILS_ENV=production
+  bin/rails r 'YtDlpManager.update_binary'
+EOF
 
 if ! systemctl is-enabled --quiet karaoke-time.service; then
   echo "Enabling the service"
