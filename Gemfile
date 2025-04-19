@@ -4,7 +4,7 @@ ruby file: ".tool-versions"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
-gem "nokogiri", "1.16.8" # locking
+gem "nokogiri"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
