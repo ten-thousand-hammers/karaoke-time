@@ -1,5 +1,19 @@
 # README
 
+## Interface
+
+### Up Next
+![Up Next](public/images/screenshots/karaoke-time-up-next.jpeg)
+
+### Playing
+![Playing](public/images/screenshots/karaoke-time-playing.jpeg)
+
+### Profile
+![Profile](public/images/screenshots/karaoke-time-profile.jpeg)
+
+### Search
+![Search](public/images/screenshots/karaoke-time-search.jpeg)
+
 ## Setup
 
 ### Operating System
