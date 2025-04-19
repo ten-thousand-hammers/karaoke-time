@@ -1,0 +1,99 @@
+name: "Promote to Production"
+
+on:
+  workflow_run:
+    workflows: ["Test"]
+    branches: [main]
+    types:
+      - completed
+
+run-name: "Promote: ${{ github.event.workflow_run.head_commit.message }}"
+
+concurrency:
+  group: production_promote
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for CHANGES.md
+        id: check_changes
+        uses: andstor/file-existence-action@v3
+        with:
+          files: CHANGES.md
+
+      - name: Generate a changelog
+        if: steps.check_changes.outputs.files_exists == 'false'
+        uses: orhun/git-cliff-action@v3
+        with:
+          config: cliff.toml
+          args: --unreleased
+        env:
+          OUTPUT: CHANGES.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Get Changelog Entry
+        id: changelog_reader
+        uses: mindsers/changelog-reader-action@v2
+        with:
+          validation_level: none
+          version: "Unreleased"
+          path: ./CHANGES.md
+
+      - name: Get next version
+        id: next_version
+        run: |
+          echo "NEXT_VERSION=$(./bin/next_version)" >> $GITHUB_OUTPUT
+
+      - name: Insert changes into CHANGELOG.md at line 7
+        run: |
+          insert_changelog="$(printf "\n## ${{ steps.next_version.outputs.NEXT_VERSION }}\n\n${{ steps.changelog_reader.outputs.changes }}")"
+          awk -v insert="$insert_changelog" 'NR==7{print insert}1' CHANGELOG.md > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
+
+      - name: Remove CHANGES.md
+        run: |
+          rm CHANGES.md
+
+      - name: Update version
+        run: |
+          echo "${{ steps.next_version.outputs.NEXT_VERSION }}" > ./config/version
+
+      - name: Commit and push CHANGELOG.md
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: CHANGELOG.md config/version
+          message: "${{ github.event.workflow_run.head_commit.message }}\n\nRelease ${{ steps.next_version.outputs.NEXT_VERSION }}\n\n${{ steps.changelog_reader.outputs.changes }}"
+          tag: ${{ steps.next_version.outputs.NEXT_VERSION }}
+          commit: "--amend"
+          push: "--force-with-lease"
+
+      - name: Build the deb
+        run: ./bin/build_deb ${{ steps.next_version.outputs.NEXT_VERSION }}
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.next_version.outputs.NEXT_VERSION }}
+          name: Release v${{ steps.next_version.outputs.NEXT_VERSION }}
+          body: ${{ steps.changelog_reader.outputs.changes }}
+          draft: false
+          prerelease: false
+          make_latest: true
+          files: 'karaoke-time-v${{ steps.next_version.outputs.NEXT_VERSION }}-arm64.deb'
+          fail_on_unmatched_files: false
