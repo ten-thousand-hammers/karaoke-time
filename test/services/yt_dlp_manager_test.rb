@@ -23,7 +23,7 @@ class YtDlpManagerTest < ActiveSupport::TestCase
 
   test "update_binary updates the binary if it exists" do
     File.expects(:exist?).with(YtDlpManager::BINARY_PATH).returns(true)
-    YtDlpManager.expects(:`).with("#{YtDlpManager::BINARY_PATH} --update-to nightly 2>&1").returns("output")
+    Open3.expects(:capture3).with("#{YtDlpManager::BINARY_PATH} --update-to nightly 2>&1").returns(["output", "", stub(success?: true)])
     assert_equal({success: true, message: "output"}, YtDlpManager.update_binary)
   end
 
@@ -35,7 +35,7 @@ class YtDlpManagerTest < ActiveSupport::TestCase
 
   test "version returns the version of the binary" do
     File.expects(:exist?).with(YtDlpManager::BINARY_PATH).returns(true)
-    YtDlpManager.expects(:`).with("#{YtDlpManager::BINARY_PATH} --version 2>&1").returns("version")
+    Open3.expects(:capture3).with("#{YtDlpManager::BINARY_PATH} --version 2>&1").returns(["version", "", stub(success?: true)])
     assert_equal "version", YtDlpManager.version
   end
 end

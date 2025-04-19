@@ -18,9 +18,9 @@ class YtDlpManager
 
   def self.update_binary
     if File.exist?(BINARY_PATH)
-      output = `#{BINARY_PATH} --update-to nightly 2>&1`
-      success = $?.success?
-      {success: success, message: output}
+      stdout, _stderr, status = Open3.capture3("#{BINARY_PATH} --update-to nightly 2>&1")
+      success = status.success?
+      {success: success, message: stdout}
     else
       download_binary
       {success: true, message: "Downloaded fresh copy of yt-dlp"}
@@ -29,7 +29,9 @@ class YtDlpManager
 
   def self.version
     return nil unless File.exist?(BINARY_PATH)
-    version = `#{BINARY_PATH} --version 2>&1`.strip
-    $?.success? ? version : nil
+    stdout, _stderr, status = Open3.capture3("#{BINARY_PATH} --version 2>&1")
+    if status.success?
+      stdout.strip
+    end
   end
 end
