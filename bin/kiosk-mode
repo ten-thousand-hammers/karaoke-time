@@ -6,7 +6,20 @@ else
   SERVER_URL="$(hostname -I | awk '{print $1}'):3000"
 fi
 
-/usr/bin/chromium-browser $SERVER_URL/splash \
+case "$(uname -s)" in
+  Darwin)
+    CHROME_EXECUTABLE="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+    ;;
+  Linux)
+    CHROME_EXECUTABLE="/usr/bin/chromium-browser"
+    ;;
+  *)
+    echo "Unsupported operating system $(uname -s)"
+    exit 1
+    ;;
+esac
+
+$CHROME_EXECUTABLE $SERVER_URL/splash \
   --start-maximized \
   --autoplay-policy=no-user-gesture-required \
   --kiosk --incognito \
