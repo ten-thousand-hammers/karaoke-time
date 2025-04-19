@@ -95,5 +95,5 @@ jobs:
           draft: false
           prerelease: false
           make_latest: true
-          files: 'karaoke-time-v${{ steps.next_version.outputs.NEXT_VERSION }}-arm64.deb'
+          files: 'karaoke-time-${{ steps.next_version.outputs.NEXT_VERSION }}-arm64.deb'
           fail_on_unmatched_files: false
