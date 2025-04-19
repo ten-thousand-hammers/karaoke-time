@@ -82,4 +82,45 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     assert_nil Act.find_by(id: act.id)
   end
+
+  test "can go to previous song" do
+    Performance.instance.update!(
+      now_playing_user: users(:nate),
+      now_playing_song: songs(:oasis__wonderwall_karaoke_version)
+    )
+
+    assert_enqueued_with(job: PrevVideoJob) do
+      post prev_song_url
+      assert_redirected_to root_path
+    end
+  end
+
+  test "can go to next song" do
+    Performance.instance.update!(
+      now_playing_user: users(:nate),
+      now_playing_song: songs(:oasis__wonderwall_karaoke_version),
+      up_next_user: users(:kate),
+      up_next_song: songs(:jason_mraz__im_yours_karaoke_version)
+    )
+
+    assert_enqueued_with(job: NextVideoJob) do
+      post next_song_url
+      assert_redirected_to root_path
+    end
+  end
+
+  test "can toggle pause" do
+    Performance.instance.update!(
+      now_playing_user: users(:nate),
+      now_playing_song: songs(:oasis__wonderwall_karaoke_version)
+    )
+
+    post pause_song_url
+    assert_response :ok
+
+    # Verify that a broadcast was made to the splash channel
+    assert_broadcast_on("splash", {action: "togglePause"}) do
+      Performance.instance.toggle_pause!
+    end
+  end
 end

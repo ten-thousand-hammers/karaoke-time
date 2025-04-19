@@ -17,17 +17,17 @@ class HomeController < ApplicationController
     head :no_content
   end
 
-  def prev
+  def prev_song
     PrevVideoJob.perform_later
     redirect_back(fallback_location: root_path)
   end
 
-  def next
+  def next_song
     NextVideoJob.perform_later(wait: 0.seconds)
     redirect_back(fallback_location: root_path)
   end
 
-  def pause
+  def pause_song
     current_performance.toggle_pause!
     head :ok
   end

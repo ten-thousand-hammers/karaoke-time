@@ -85,6 +85,6 @@ class Performance < ApplicationRecord
   }
 
   def toggle_pause!
-    ActionCable.server.broadcast("splash", { action: "togglePause" })
+    ActionCable.server.broadcast("splash", {action: "togglePause"})
   end
 end
