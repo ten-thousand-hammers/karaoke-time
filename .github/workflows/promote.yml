@@ -80,7 +80,7 @@ jobs:
         with:
           add: CHANGELOG.md config/version README.md
           message: "${{ github.event.workflow_run.head_commit.message }}\n\nRelease ${{ steps.next_version.outputs.NEXT_VERSION }}\n\n${{ steps.changelog_reader.outputs.changes }}"
-          tag: ${{ steps.next_version.outputs.NEXT_VERSION }}
+          tag: v${{ steps.next_version.outputs.NEXT_VERSION }}
           commit: "--amend"
           push: "--force-with-lease"
 
