@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   get "splash" => "splash#index"
 
   post "skip" => "home#skip"
+  post "next_song", to: "home#next"
+  post "prev_song", to: "home#prev"
+  post "pause_song", to: "home#pause"
+
   get "qrcode" => "home#qrcode"
 
   resources :profile, only: [:edit, :update]

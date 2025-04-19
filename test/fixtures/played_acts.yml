@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: played_acts
+#
+#  id             :integer          not null, primary key
+#  played_at      :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  performance_id :integer          not null
+#  song_id        :integer          not null
+#  user_id        :integer          not null
+#
+# Indexes
+#
+#  index_played_acts_on_performance_id  (performance_id)
+#  index_played_acts_on_song_id         (song_id)
+#  index_played_acts_on_user_id         (user_id)
+#
+# Foreign Keys
+#
+#  performance_id  (performance_id => performances.id)
+#  song_id         (song_id => songs.id)
+#  user_id         (user_id => users.id)
+#

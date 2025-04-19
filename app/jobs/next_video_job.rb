@@ -7,6 +7,14 @@ class NextVideoJob < ApplicationJob
     up_next_song = Performance.instance.up_next_song
     up_next_user = Performance.instance.up_next_user
 
+    if Performance.instance.now_playing_song.present?
+      Performance.instance.played_acts.create!(
+        song: Performance.instance.now_playing_song,
+        user: Performance.instance.now_playing_user,
+        played_at: Time.current
+      )
+    end
+
     Performance.instance.update!(
       now_playing_song: nil,
       now_playing_user: nil

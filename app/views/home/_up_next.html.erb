@@ -1,7 +1,11 @@
 <%= turbo_frame_tag "up_next" do %>
   <h3 class="text-xl text-amber-500">
     <% if performance.up_next_song.present? %>
-      <span class="text-blue-400"><%= performance.up_next_song.name %></span> by <span class="text-yellow-300"><%= performance.up_next_user.nickname %></span>
+      <% if performance.up_next_user.present? %>
+        <span class="text-blue-400"><%= performance.up_next_song.name %></span> by <span class="text-yellow-300"><%= performance.up_next_user.nickname %></span>
+      <% else %>
+        <span class="text-blue-400"><%= performance.up_next_song.name %></span>
+      <% end %>
       <%= link_to "Skip", skip_path(up_next: true), data: { turbo_method: :post, turbo_confirm: "Are you sure?" }, class: "text-xs text-teal-400" %>
     <% else %>
       No song is queued

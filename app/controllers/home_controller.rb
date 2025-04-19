@@ -17,6 +17,21 @@ class HomeController < ApplicationController
     head :no_content
   end
 
+  def prev
+    PrevVideoJob.perform_later
+    redirect_back(fallback_location: root_path)
+  end
+
+  def next
+    NextVideoJob.perform_later(wait: 0.seconds)
+    redirect_back(fallback_location: root_path)
+  end
+
+  def pause
+    current_performance.toggle_pause!
+    head :ok
+  end
+
   def qrcode
     qr = RQRCode::QRCode.new(server_url)
     png = qr.as_png(

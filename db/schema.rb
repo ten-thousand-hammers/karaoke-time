@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_07_035822) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_19_174759) do
   create_table "acts", force: :cascade do |t|
     t.integer "song_id", null: false
     t.datetime "created_at", null: false
@@ -36,6 +36,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_07_035822) do
     t.index ["now_playing_user_id"], name: "index_performances_on_now_playing_user_id"
     t.index ["up_next_song_id"], name: "index_performances_on_up_next_song_id"
     t.index ["up_next_user_id"], name: "index_performances_on_up_next_user_id"
+  end
+
+  create_table "played_acts", force: :cascade do |t|
+    t.integer "performance_id", null: false
+    t.integer "song_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "played_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["performance_id"], name: "index_played_acts_on_performance_id"
+    t.index ["song_id"], name: "index_played_acts_on_song_id"
+    t.index ["user_id"], name: "index_played_acts_on_user_id"
   end
 
   create_table "settings", force: :cascade do |t|
@@ -91,6 +103,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_07_035822) do
   add_foreign_key "performances", "songs", column: "up_next_song_id"
   add_foreign_key "performances", "users", column: "now_playing_user_id"
   add_foreign_key "performances", "users", column: "up_next_user_id"
+  add_foreign_key "played_acts", "performances"
+  add_foreign_key "played_acts", "songs"
+  add_foreign_key "played_acts", "users"
   add_foreign_key "user_songs", "songs"
   add_foreign_key "user_songs", "users"
 end
