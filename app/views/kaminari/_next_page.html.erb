@@ -7,7 +7,7 @@
     remote:        data-remote
 -%>
 <% unless current_page.last? %>
-  <%= link_to url, remote: remote, rel: 'next', class: "relative inline-flex items-center px-6 py-6 text-blue-400 ring-1 ring-inset ring-blue-300 hover:bg-blue-50 focus:z-20 focus:outline-offset-0" do %>
+  <%= link_to url, remote: remote, rel: 'next', class: "relative inline-flex items-center px-4 py-4 text-blue-400 ring-1 ring-inset ring-blue-300 hover:bg-blue-50 focus:z-20 focus:outline-offset-0" do %>
   <span class="sr-only"><%= t('views.pagination.next').html_safe %></span>
   <i class="fa-solid fa-angle-right"></i>
   <% end %>

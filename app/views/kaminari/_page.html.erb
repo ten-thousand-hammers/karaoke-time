@@ -7,7 +7,7 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<% class_names = "relative #{page.first? && page.current? ? 'rounded-l-md' : ''} #{page.last? && page.current? ? 'rounded-r-md' : ''} inline-flex items-center px-8 py-6 text-sm font-semibold " %>
+<% class_names = "relative #{page.first? && page.current? ? 'rounded-l-md' : ''} #{page.last? && page.current? ? 'rounded-r-md' : ''} inline-flex items-center px-4 py-4 text-sm font-semibold " %>
 <% if page.current? %>
   <% class_names += "z-10 bg-blue-600 text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" %>
 <% else %>
