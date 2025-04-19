@@ -252,26 +252,29 @@ jobs:
   #     - name: Brakeman
   #       run: bin/brakeman -z
 
-  SecurityBundler:
-    runs-on: ubuntu-24.04
-    needs: [Setup]
-    env:
-      BUNDLE_PATH: vendor/bundle
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # Disabling because nokogiri isn't building and I can't upgradde ruby
+  # unless we have a way of deploying a specific version
+  
+  # SecurityBundler:
+  #   runs-on: ubuntu-24.04
+  #   needs: [Setup]
+  #   env:
+  #     BUNDLE_PATH: vendor/bundle
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Install mise dependencies
-        uses: jdx/mise-action@v2
+  #     - name: Install mise dependencies
+  #       uses: jdx/mise-action@v2
 
-      - name: Restore cached rubygems
-        uses: actions/cache/restore@v4
-        id: cache-rubygems
-        with:
-          path: vendor/bundle
-          key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+  #     - name: Restore cached rubygems
+  #       uses: actions/cache/restore@v4
+  #       id: cache-rubygems
+  #       with:
+  #         path: vendor/bundle
+  #         key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
 
-      - name: 'Bundler Audit'
-        uses: laicuRoot/bundler-audit-action@use-ruby-3.2.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: 'Bundler Audit'
+  #       uses: laicuRoot/bundler-audit-action@use-ruby-3.2.2
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
