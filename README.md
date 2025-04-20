@@ -26,10 +26,10 @@ I've only tested this on a Raspberry Pi 4 Model B with 4 Gigs of ram. It may wor
 
 Download the latest release from here: https://github.com/ten-thousand-hammers/karaoke-time/releases
 
-Find the karaoke-time-0.1.8-arm64.deb file, download it and either double-click or run this command to install
+Find the karaoke-time-0.1.5-arm64.deb file, download it and either double-click or run this command to install
 
 ```bash
-dpkg -i karaoke-time-0.1.8-arm64.deb
+dpkg -i karaoke-time-0.1.5-arm64.deb
 ```
 
 This will create a `karaoke-time` user and setup the local database as well as start the service in the background. It will run on port 3000 and you should be able to access the server after install by using this url
