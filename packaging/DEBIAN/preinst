@@ -5,14 +5,4 @@ echo "Setup the user and group"
 groupadd karaoke-time || true
 adduser --system --home /var/lib/karaoke --ingroup karaoke-time --shell /bin/bash karaoke-time || true
 
-echo "Activating mise"
-
-if [ ! -f /var/lib/karaoke/.bashrc ]; then
-  su - karaoke-time -c "echo 'export PATH=\"\$PATH:~/bin\"' >> ~/.bashrc"
-  su - karaoke-time -c "echo 'eval \"\$(~/bin/mise activate bash)\"' >> ~/.bashrc"
-else
-  grep -q "PATH=\"\$PATH:~/bin\"" /var/lib/karaoke/.bashrc || su - karaoke-time -c "echo 'export PATH=\"\$PATH:~/bin\"' >> ~/.bashrc"
-  grep -q mise /var/lib/karaoke/.bashrc || su - karaoke-time -c "echo 'eval \"\$(~/bin/mise activate bash)\"' >> ~/.bashrc"
-fi
-
 exit 0

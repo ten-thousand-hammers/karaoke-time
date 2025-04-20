@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-VERSION="$1"
+VERSION=$1
 ARCH=arm64
 
 # Clean up any previous builds
@@ -29,9 +29,6 @@ rsync -av \
   --exclude=".envrc" \
   --exclude="tmp" \
   $DIR/.. karaoke-time-$VERSION-$ARCH/var/lib/karaoke/
-
-curl https://mise.jdx.dev/mise-latest-linux-arm64 > karaoke-time-$VERSION-$ARCH/var/lib/karaoke/bin/mise
-chmod +x karaoke-time-$VERSION-$ARCH/var/lib/karaoke/bin/mise
 
 mkdir -p karaoke-time-$VERSION-$ARCH/usr/local/bin
 cp bin/kiosk-mode karaoke-time-$VERSION-$ARCH/usr/local/bin/karaoke-time

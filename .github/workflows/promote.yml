@@ -75,21 +75,17 @@ jobs:
         run: |
           sed -i -e "s/karaoke-time-[0-9.]*-arm64.deb/karaoke-time-${{ steps.next_version.outputs.NEXT_VERSION }}-arm64.deb/g" README.md
 
-      - name: Update version in packaging/DEBIAN/control
-        run: |
-          sed -i -e "s/Version: [0-9.]*/Version: ${{ steps.next_version.outputs.NEXT_VERSION }}/g" packaging/DEBIAN/control
-
       - name: Commit and push CHANGELOG.md
         uses: EndBug/add-and-commit@v9
         with:
-          add: CHANGELOG.md config/version README.md packaging/DEBIAN/control
+          add: CHANGELOG.md config/version README.md
           message: "${{ github.event.workflow_run.head_commit.message }}\n\nRelease ${{ steps.next_version.outputs.NEXT_VERSION }}\n\n${{ steps.changelog_reader.outputs.changes }}"
           tag: v${{ steps.next_version.outputs.NEXT_VERSION }}
           commit: "--amend"
           push: "--force-with-lease"
 
       - name: Build the deb
-        run: ./bin/build_deb "${{ steps.next_version.outputs.NEXT_VERSION }}"
+        run: ./bin/build_deb ${{ steps.next_version.outputs.NEXT_VERSION }}
 
       - name: Create Release
         id: create_release
