@@ -33,6 +33,7 @@ class Performance < ApplicationRecord
   belongs_to :now_playing_song, class_name: "Song", optional: true
   belongs_to :now_playing_user, class_name: "User", optional: true
   has_many :acts
+  has_many :played_acts, -> { order(played_at: :desc) }
 
   def self.instance
     first || create
@@ -82,4 +83,8 @@ class Performance < ApplicationRecord
         target: "logo"
     end
   }
+
+  def toggle_pause!
+    ActionCable.server.broadcast("splash", {action: "togglePause"})
+  end
 end

@@ -13,6 +13,13 @@ class SplashChannel < ApplicationCable::Channel
   end
 
   def ended(_data)
+    # Move to played_acts
+    Performance.instance.played_acts.create!(
+      song: Performance.instance.now_playing_song,
+      user: Performance.instance.now_playing_user,
+      played_at: Time.current
+    )
+
     # Clear the now_playing fields
     Performance.instance.update!(
       now_playing_song: nil,
@@ -21,5 +28,9 @@ class SplashChannel < ApplicationCable::Channel
 
     # Wait 10 seconds before starting the next song
     NextVideoJob.perform_later(wait: 10.seconds)
+  end
+
+  def toggle_pause
+    broadcast_to "splash", action: "togglePause"
   end
 end

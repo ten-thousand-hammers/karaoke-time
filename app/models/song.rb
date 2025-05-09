@@ -21,7 +21,8 @@
 class Song < ApplicationRecord
   has_many :user_songs
   has_many :users, through: :user_songs
-  has_many :acts
+  has_many :acts, dependent: :destroy
+  has_many :played_acts, dependent: :destroy
 
   enum download_status: {pending: 0, downloading: 1, completed: 2, failed: 3}
 
